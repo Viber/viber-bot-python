@@ -201,10 +201,3 @@
    See the License for the specific language governing permissions and
    limitations under the License.
 
-
-Dependencies License (MIT)
-==========================
-[underscore](https://www.npmjs.com/package/underscore)
-[body-parser](https://www.npmjs.com/package/body-parser)
-[express](https://www.npmjs.com/package/express)
-[needle](https://www.npmjs.com/package/needle)
