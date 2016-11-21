@@ -28,8 +28,8 @@ from viber.api.bot_configuration import BotConfiguration
 
 bot_configuration = BotConfiguration(
 	name='PythonSampleBot',
-	avatar='http://site.com/avatar.jpg',
-	auth_token='451798a889a17401-865360a5474b3993-8fe73f00b019c611'
+	avatar='http://viber.com/avatar.jpg',
+	auth_token='YOUR_AUTH_TOKEN_HERE'
 )
 viber = Api(bot_configuration)
 ```
