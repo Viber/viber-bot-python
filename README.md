@@ -211,8 +211,7 @@ Returns `None`. **Example**
 viber.unset_webhook()
 ```
 
-<a name="
-">get_account_info</a>
+<a name="get_account_info"></a>
 ### Api.get_account_info()
 Returns an `object` ([Formmated from the following JSON](https://developers.viber.com/customer/en/portal/articles/2541122-get-account-info?b_id=15145)). **Example**
 ```python
