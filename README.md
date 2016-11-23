@@ -20,7 +20,7 @@ Creating a basic Viber bot is simple:
 4. Start your web server
 5. Call set_webhook(url) with your webserver url
 
-## A simple Echo Bot:
+## A simple Echo Bot
 ### Firstly, let's *import and configure* our bot:
 ```python
 from viber.api.api import Api
@@ -34,8 +34,8 @@ bot_configuration = BotConfiguration(
 viber = Api(bot_configuration)
 ```
 
-### create an https server
-next thing you should do is starting a https server.
+### Create an HTTPS server
+Next thing you should do is starting a https server.
 and yes, as we said in the [Library Prerequisites](#Library Prerequisites) it has to be https server.
 create a server however you like, for example with Flask:
 
@@ -60,7 +60,7 @@ After the server is up and kickin' you can set a webook.
 Viber will push messages sent to this URL. Webserver should be internet-facing.
 
 ```python
-viber.set_webhook('https://mybotwebserver.com/incoming')
+viber.set_webhook('https://mybotwebserver.com:443/')
 ```
 
 ### Logging
@@ -76,7 +76,7 @@ handler.setFormatter(formatter)
 logger.addHandler(handler)
 ```
 
-### Do you supply a basic types of messages ?
+### Do you supply a basic types of messages?
 Well, funny you ask. Yes we do.
 All the Message types are located in 'viber.api.messages' package.
 Here's some examples
@@ -139,7 +139,7 @@ viber = Api(BotConfiguration(
 ))
 
 
-@app.route('/incoming', methods=['POST'])
+@app.route('/', methods=['POST'])
 def incoming():
 	logger.debug("received request. post data: {0}".format(request.get_data()))
 	# every viber message is signed, you can verify the signature using this method
@@ -186,7 +186,7 @@ As you can see there's a bunch of Request types [here's a list of them](# Reques
     * [.send_messages(to, messages)](#send_messages) ⇒ `list of message tokens sent`
 
 <a name="new-Api()"></a>
-### new Api()
+### New Api()
 
 | Param | Type | Description |
 | --- | --- | --- |
@@ -295,7 +295,7 @@ Members:
     * get_user() ⇒ `UserProfile`
 
 #### ViberDeliveredRequest object
-inherits from [ViberRequest](#ViberRequest)
+Inherits from [ViberRequest](#ViberRequest)
 
 Members:
 
@@ -310,7 +310,7 @@ Members:
     * get_user_id() ⇒ `string`
 
 #### ViberFailedRequest object
-inherits from [ViberRequest](#ViberRequest)
+Inherits from [ViberRequest](#ViberRequest)
 
 Members:
 
@@ -327,7 +327,7 @@ Members:
     * get_desc() ⇒ `string`
 
 #### ViberMessageRequest object
-inherits from [ViberRequest](#ViberRequest)
+Inherits from [ViberRequest](#ViberRequest)
 
 Members:
 
@@ -344,7 +344,7 @@ Members:
     * get_sender() ⇒ `UserProfile`
 
 #### ViberSeenRequest object
-inherits from [ViberRequest](#ViberRequest)
+Inherits from [ViberRequest](#ViberRequest)
 
 Members:
 
@@ -359,7 +359,7 @@ Members:
     * get_user_id() ⇒ `string`
 
 #### ViberSubscribedRequest object
-inherits from [ViberRequest](#ViberRequest)
+Inherits from [ViberRequest](#ViberRequest)
 
 Members:
 
@@ -372,7 +372,7 @@ Members:
     * get_user() ⇒ `UserProfile`
 
 #### ViberUnsubscribedRequest object
-inherits from [ViberRequest](#ViberRequest)
+Inherits from [ViberRequest](#ViberRequest)
 
 Members:
 
