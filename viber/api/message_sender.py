@@ -1,5 +1,7 @@
 import json
 
+from viber.api.consts import BOT_API_ENDPOINT
+
 
 class MessageSender(object):
 	def __init__(self, logger, request_sender, bot_configuration):
@@ -9,7 +11,7 @@ class MessageSender(object):
 
 	def send_message(self, to, sender_name, sender_avatar, message):
 		if not message.validate():
-			self._logger.error("failed validating message: {0}".format(message))
+			self._logger.error(u"failed validating message: {0}".format(message))
 			raise Exception("failed validating message: {0}".format(message))
 
 		payload = message.to_dict()
@@ -22,10 +24,11 @@ class MessageSender(object):
 			}
 		})
 
-		self._logger.debug("going to send message: {0}".format(payload))
-		result = self._request_sender.post_request('send_message', json.dumps(self.remove_empty_fields(payload)))
+		self._logger.debug(u"going to send message: {0}".format(payload))
+		result = self._request_sender.post_request(BOT_API_ENDPOINT.SEND_MESSAGE, json.dumps(self.remove_empty_fields(payload)))
+
 		if not result['status'] == 0:
-			raise Exception("failed with status: {0}, message: {1}".format(result['status'], result['status_message']))
+			raise Exception(u"failed with status: {0}, message: {1}".format(result['status'], result['status_message']))
 
 		return result['message_token']
 

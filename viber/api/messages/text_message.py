@@ -22,6 +22,9 @@ class TextMessage(Message):
 	def validate(self):
 		return self._text is not None
 
+	def get_text(self):
+		return self._text
+
 	@python_2_unicode_compatible
 	def __str__(self):
 		return u"TextMessage [{0}, text={1}]".format(super(TextMessage, self).__str__(), self._text)

@@ -1,6 +1,6 @@
 
-
 VIBER_BOT_API_URL = "https://chatapi.viber.com/pa"
+
 
 class BOT_API_ENDPOINT(object):
 	SET_WEBHOOK = 'set_webhook'

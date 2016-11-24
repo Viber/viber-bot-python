@@ -21,6 +21,9 @@ class ContactMessage(Message):
 			self._contact = Contact().from_dict(message_data['contact'])
 		return self
 
+	def get_contact(self):
+		return self._contact
+
 	def validate(self):
 		return self._contact is not None \
 			   and self._contact.get_name() is not None \

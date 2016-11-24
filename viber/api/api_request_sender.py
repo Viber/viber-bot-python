@@ -22,18 +22,20 @@ class ApiRequestSender(object):
 				webhook_events = [webhook_events]
 			payload['event_types'] = webhook_events
 
-		result = self.post_request(endpoint=BOT_API_ENDPOINT.SET_WEBHOOK,
-								   payload=json.dumps(payload))
+		result = self.post_request(
+			endpoint=BOT_API_ENDPOINT.SET_WEBHOOK,
+			payload=json.dumps(payload))
 
 		if not result['status'] == 0:
-			raise Exception("failed with status: {0}, message: {1}".format(result['status'], result['status_message']))
+			raise Exception(u"failed with status: {0}, message: {1}".format(result['status'], result['status_message']))
 
 	def get_account_info(self):
 		payload = {
 			'auth_token': self._bot_configuration.get_auth_token()
 		}
-		return self.post_request(endpoint=BOT_API_ENDPOINT.GET_ACCOUNT_INFO,
-								 payload=json.dumps(payload))
+		return self.post_request(
+			endpoint=BOT_API_ENDPOINT.GET_ACCOUNT_INFO,
+			payload=json.dumps(payload))
 
 	def post_request(self, endpoint, payload):
 		try:
@@ -41,10 +43,10 @@ class ApiRequestSender(object):
 			response.raise_for_status()
 			return json.loads(response.text)
 		except RequestException as e:
-			self._logger.error("failed to post request to endpoint={0}, with payload={1}. error is: {2}"
+			self._logger.error(u"failed to post request to endpoint={0}, with payload={1}. error is: {2}"
 							   .format(endpoint, payload, traceback.format_exc()))
 			raise e
 		except Exception as ex:
-			self._logger.error("unexpected Exception while trying to post request. error is: {0}"
+			self._logger.error(u"unexpected Exception while trying to post request. error is: {0}"
 							   .format(traceback.format_exc()))
 			raise ex

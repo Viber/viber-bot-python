@@ -16,8 +16,14 @@ class Api(object):
 		self._request_sender = ApiRequestSender(self._logger, VIBER_BOT_API_URL, bot_configuration)
 		self._message_sender = MessageSender(self._logger, self._request_sender, bot_configuration)
 
+	def get_name(self):
+		return self._bot_configuration.get_name()
+
+	def get_avatar(self):
+		return self._bot_configuration.get_avatar()
+
 	def set_webhook(self, url, webhook_events=None):
-		self._logger.debug("setting webhook to url: {0}".format(url))
+		self._logger.debug(u"setting webhook to url: {0}".format(url))
 		return self._request_sender.set_webhook(url, webhook_events)
 
 	def unset_webhook(self):
@@ -27,7 +33,7 @@ class Api(object):
 	def get_account_info(self):
 		self._logger.debug("requesting account info")
 		account_info = self._request_sender.get_account_info()
-		self._logger.debug("received account info: {0}".format(account_info))
+		self._logger.debug(u"received account info: {0}".format(account_info))
 		return account_info
 
 	def verify_signature(self, request_data, signature):
@@ -35,9 +41,9 @@ class Api(object):
 
 	def parse_request(self, request_data):
 		self._logger.debug("parsing request")
-		request_dict = json.loads(request_data.decode('utf-8'))
+		request_dict = json.loads(request_data, encoding='utf-16')
 		request = create_request(request_dict)
-		self._logger.debug("parsed request={0}".format(request))
+		self._logger.debug(u"parsed request={0}".format(request))
 		return request
 
 	def send_messages(self, to, messages):
@@ -46,6 +52,7 @@ class Api(object):
 		:param messages: list of Message objects to be sent
 		:return: list of tokens of the sent messages
 		"""
+		self._logger.debug("going to send messages: {0}, to: {1}".format(messages, to))
 		if not isinstance(messages, list):
 			messages = [messages]
 

@@ -27,6 +27,15 @@ class FileMessage(Message):
 			self._file_name = message_data['file_name']
 		return self
 
+	def get_media(self):
+		return self._media
+
+	def get_size(self):
+		return self._size
+
+	def get_file_name(self):
+		return self._file_name
+
 	def validate(self):
 		return self._media is not None \
 			  and self._size is not None \

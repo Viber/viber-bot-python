@@ -26,6 +26,12 @@ class Location(object):
 			'lon': self._lon
 		}
 
+	def get_latitude(self):
+		return self._lat
+
+	def get_longitude(self):
+		return self._lon
+
 	def validate(self):
 		if self._lat is None or self._lon is None:
 			return False
@@ -34,6 +40,9 @@ class Location(object):
 		if self._lon >= LocationConsts.MAX_LONGITUDE or self._lon <= LocationConsts.MIN_LONGITUDE:
 			return False
 		return True
+
+	def __eq__(self, other):
+		return self._lat == other.get_latitude() and self._lon == other.get_longitude()
 
 	@python_2_unicode_compatible
 	def __str__(self):

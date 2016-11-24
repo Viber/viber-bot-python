@@ -21,8 +21,11 @@ class LocationMessage(Message):
 			self._location = Location().from_dict(message_data['location'])
 		return self
 
+	def get_location(self):
+		return self._location
+
 	def validate(self):
-		return self._location.validate()
+		return self._location and self._location.validate()
 
 	@python_2_unicode_compatible
 	def __str__(self):

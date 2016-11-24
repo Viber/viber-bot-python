@@ -30,6 +30,15 @@ class PictureMessage(Message):
 	def validate(self):
 		return self._text is not None and self._media is not None
 
+	def get_text(self):
+		return self._text
+
+	def get_media(self):
+		return self._media
+
+	def get_thumbnail(self):
+		return self._thumbnail
+
 	@python_2_unicode_compatible
 	def __str__(self):
 		return u"PictureMessage [{0}, text={1}, media={2}, thumbnail={3}]".format(super(PictureMessage, self).__str__(),

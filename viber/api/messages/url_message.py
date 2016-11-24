@@ -19,6 +19,9 @@ class URLMessage(Message):
 			self._media = message_data['media']
 		return self
 
+	def get_media(self):
+		return self._media
+
 	def validate(self):
 		return self._media is not None
 

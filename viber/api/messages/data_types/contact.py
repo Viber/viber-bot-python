@@ -25,6 +25,9 @@ class Contact(object):
 	def get_phone_number(self):
 		return self._phone_number
 
+	def __eq__(self, other):
+		return self._name == other.get_name() and self._phone_number == other.get_phone_number()
+
 	@python_2_unicode_compatible
 	def __str__(self):
 		return u"Contact[name={0}, phone_number={1}]".format(self._name, self._phone_number)
