@@ -4,7 +4,7 @@ Please visit [Getting Started](https://developers.viber.com/customer/en/portal/a
 
 This package can be imported using pip by adding the following to your `requirements.txt`:
 ```
-viberbot==0.1.3.2
+viberbot==0.1.3.7
 ```
 
 ## License
@@ -28,7 +28,7 @@ Creating a basic Viber bot is simple:
 ## A simple Echo Bot
 ### Firstly, let's *import and configure* our bot:
 ```python
-from viberbot.api.api import Api
+from viberbot import Api
 from viberbot.api.bot_configuration import BotConfiguration
 
 bot_configuration = BotConfiguration(
@@ -124,7 +124,7 @@ Check out the full API documentation for more advanced uses.
 ### Let's add it all up and reply with a message!
 ```python
 from flask import Flask, request, Response
-from viberbot.api.api import Api
+from viberbot import Api
 from viberbot.api.bot_configuration import BotConfiguration
 from viberbot.api.messages import VideoMessage
 from viberbot.api.messages.text_message import TextMessage
