@@ -1,6 +1,6 @@
 from future.utils import python_2_unicode_compatible
-from viber.api.messages.message import Message
-from viber.api.messages.message_type import MessageType
+from viberbot.api.messages.message import Message
+from viberbot.api.messages.message_type import MessageType
 
 
 class PictureMessage(Message):

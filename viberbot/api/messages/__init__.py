@@ -1,13 +1,13 @@
-from viber.api.messages.contact_message import ContactMessage
-from viber.api.messages.file_message import FileMessage
-from viber.api.messages.location_message import LocationMessage
-from viber.api.messages.picture_message import PictureMessage
-from viber.api.messages.sticker_message import StickerMessage
-from viber.api.messages.url_message import URLMessage
-from viber.api.messages.video_message import VideoMessage
-from viber.api.messages.message_type import MessageType
-from viber.api.messages.text_message import TextMessage
-from viber.api.messages.location_message import LocationMessage
+from viberbot.api.messages.contact_message import ContactMessage
+from viberbot.api.messages.file_message import FileMessage
+from viberbot.api.messages.location_message import LocationMessage
+from viberbot.api.messages.picture_message import PictureMessage
+from viberbot.api.messages.sticker_message import StickerMessage
+from viberbot.api.messages.url_message import URLMessage
+from viberbot.api.messages.video_message import VideoMessage
+from viberbot.api.messages.message_type import MessageType
+from viberbot.api.messages.text_message import TextMessage
+from viberbot.api.messages.location_message import LocationMessage
 
 MESSAGE_TYPE_TO_CLASS = {
 	MessageType.URL: URLMessage,
@@ -28,5 +28,3 @@ def get_message(message_dict):
 		raise Exception(u"message type '{0}' is not supported".format(message_dict['type']))
 
 	return MESSAGE_TYPE_TO_CLASS[message_dict['type']]().from_dict(message_dict)
-
-

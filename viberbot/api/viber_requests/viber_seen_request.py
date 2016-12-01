@@ -1,6 +1,6 @@
 from future.utils import python_2_unicode_compatible
 from ..event_type import EventType
-from viber.api.viber_requests.viber_request import ViberRequest
+from viberbot.api.viber_requests.viber_request import ViberRequest
 
 
 class ViberSeenRequest(ViberRequest):
@@ -27,4 +27,3 @@ class ViberSeenRequest(ViberRequest):
 			.format(super(ViberSeenRequest, self).__str__(),
 					self._message_token,
 					self._user_id)
-

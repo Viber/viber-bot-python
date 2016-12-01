@@ -1,6 +1,6 @@
 from future.utils import python_2_unicode_compatible
-from viber.api.event_type import EventType
-from viber.api.viber_requests.viber_request import ViberRequest
+from viberbot.api.event_type import EventType
+from viberbot.api.viber_requests.viber_request import ViberRequest
 
 
 class ViberFailedRequest(ViberRequest):
@@ -33,5 +33,3 @@ class ViberFailedRequest(ViberRequest):
 					self._message_token,
 					self._user_id,
 					self._desc)
-
-

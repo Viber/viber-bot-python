@@ -1,8 +1,8 @@
 from future.utils import python_2_unicode_compatible
-from viber.api import messages
-from viber.api.event_type import EventType
-from viber.api.user_profile import UserProfile
-from viber.api.viber_requests.viber_request import ViberRequest
+from viberbot.api import messages
+from viberbot.api.event_type import EventType
+from viberbot.api.user_profile import UserProfile
+from viberbot.api.viber_requests.viber_request import ViberRequest
 
 
 class ViberMessageRequest(ViberRequest):
@@ -37,5 +37,3 @@ class ViberMessageRequest(ViberRequest):
 					self._message_token,
 					self._sender,
 					self._message)
-
-

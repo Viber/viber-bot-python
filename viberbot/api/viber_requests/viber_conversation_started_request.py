@@ -1,7 +1,7 @@
 from future.utils import python_2_unicode_compatible
-from viber.api.event_type import EventType
-from viber.api.user_profile import UserProfile
-from viber.api.viber_requests.viber_request import ViberRequest
+from viberbot.api.event_type import EventType
+from viberbot.api.user_profile import UserProfile
+from viberbot.api.viber_requests.viber_request import ViberRequest
 
 
 class ViberConversationStartedRequest(ViberRequest):
@@ -45,4 +45,3 @@ class ViberConversationStartedRequest(ViberRequest):
 					self._type,
 					self._context,
 					self._user)
-

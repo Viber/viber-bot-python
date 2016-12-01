@@ -3,10 +3,10 @@ import hmac
 import json
 import logging
 
-from viber.api.consts import VIBER_BOT_API_URL
-from viber.api.viber_requests import create_request
-from viber.api.api_request_sender import ApiRequestSender
-from viber.api.message_sender import MessageSender
+from viberbot.api.consts import VIBER_BOT_API_URL
+from viberbot.api.viber_requests import create_request
+from viberbot.api.api_request_sender import ApiRequestSender
+from viberbot.api.message_sender import MessageSender
 
 
 class Api(object):
@@ -69,4 +69,3 @@ class Api(object):
 						msg=message,
 						digestmod=hashlib.sha256)\
 			.hexdigest()
-
