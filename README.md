@@ -28,8 +28,8 @@ Creating a basic Viber bot is simple:
 ## A simple Echo Bot
 ### Firstly, let's *import and configure* our bot:
 ```python
-from viber.api.api import Api
-from viber.api.bot_configuration import BotConfiguration
+from viberbot.api.api import Api
+from viberbot.api.bot_configuration import BotConfiguration
 
 bot_configuration = BotConfiguration(
 	name='PythonSampleBot',
@@ -87,11 +87,11 @@ All the Message types are located in 'viber.api.messages' package.
 Here's some examples
 
 ```python
-from viber.api.messages.text_message import TextMessage
-from viber.api.messages.contact_message import ContactMessage
-from viber.api.messages.data_types.contact import Contact
-from viber.api.messages.picture_message import PictureMessage
-from viber.api.messages.video_message import VideoMessage
+from viberbot.api.messages.text_message import TextMessage
+from viberbot.api.messages.contact_message import ContactMessage
+from viberbot.api.messages.data_types.contact import Contact
+from viberbot.api.messages.picture_message import PictureMessage
+from viberbot.api.messages.video_message import VideoMessage
 
 # creation of text message
 text_message = TextMessage(text="sample text message!")
@@ -124,10 +124,10 @@ Check out the full API documentation for more advanced uses.
 ### Let's add it all up and reply with a message!
 ```python
 from flask import Flask, request, Response
-from viber.api.api import Api
-from viber.api.bot_configuration import BotConfiguration
-from viber.api.messages import VideoMessage
-from viber.api.messages.text_message import TextMessage
+from viberbot.api.api import Api
+from viberbot.api.bot_configuration import BotConfiguration
+from viberbot.api.messages import VideoMessage
+from viberbot.api.messages.text_message import TextMessage
 import logging
 
 from viber.api.viber_requests import ViberConversationStartedRequest
@@ -478,7 +478,7 @@ message = VideoMessage(media="http://site.com/video.mp4", size=21499)
 | --- | --- |
 | location | `Location` |
 ```python
-from viber.api.messages.data_types.location import Location
+from viberbot.api.messages.data_types.location import Location
 
 location = Location(lat=0.0, lon=0.0)
 location_message = LocationMessage(location=location)
