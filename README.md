@@ -4,7 +4,7 @@ Please visit [Getting Started](https://developers.viber.com/customer/en/portal/a
 
 This package can be imported using pip by adding the following to your `requirements.txt`:
 ```
-viberbot==0.1.3.1
+viberbot==0.1.3.2
 ```
 
 ## License
