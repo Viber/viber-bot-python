@@ -1,12 +1,12 @@
-from viber.api.event_type import EventType
-from viber.api.viber_requests.viber_conversation_started_request import ViberConversationStartedRequest
-from viber.api.viber_requests.viber_delivered_request import ViberDeliveredRequest
-from viber.api.viber_requests.viber_failed_request import ViberFailedRequest
-from viber.api.viber_requests.viber_message_request import ViberMessageRequest
-from viber.api.viber_requests.viber_request import ViberRequest
-from viber.api.viber_requests.viber_seen_request import ViberSeenRequest
-from viber.api.viber_requests.viber_subscribed_request import ViberSubscribedRequest
-from viber.api.viber_requests.viber_unsubscribed_request import ViberUnsubscribedRequest
+from viberbot.api.event_type import EventType
+from viberbot.api.viber_requests.viber_conversation_started_request import ViberConversationStartedRequest
+from viberbot.api.viber_requests.viber_delivered_request import ViberDeliveredRequest
+from viberbot.api.viber_requests.viber_failed_request import ViberFailedRequest
+from viberbot.api.viber_requests.viber_message_request import ViberMessageRequest
+from viberbot.api.viber_requests.viber_request import ViberRequest
+from viberbot.api.viber_requests.viber_seen_request import ViberSeenRequest
+from viberbot.api.viber_requests.viber_subscribed_request import ViberSubscribedRequest
+from viberbot.api.viber_requests.viber_unsubscribed_request import ViberUnsubscribedRequest
 
 
 EVENT_TYPE_TO_CLASS = {
@@ -29,5 +29,3 @@ def create_request(request_dict):
 		raise Exception("event type '{0}' is not supported".format(request_dict['event']))
 
 	return EVENT_TYPE_TO_CLASS[request_dict['event']]().from_dict(request_dict)
-
-
