@@ -41,7 +41,7 @@ class Api(object):
 
 	def parse_request(self, request_data):
 		self._logger.debug("parsing request")
-		request_dict = json.loads(request_data, encoding='utf-16')
+		request_dict = json.loads(request_data)
 		request = create_request(request_dict)
 		self._logger.debug(u"parsed request={0}".format(request))
 		return request
