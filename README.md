@@ -1,4 +1,4 @@
-# Viber Bot API
+# Viber Python Bot API
 Use this library to communicate with the Viber API to develop a bot for [Viber](https://developers.viber.com/).
 Please visit [Getting Started](https://developers.viber.com/customer/en/portal/articles/2567874-getting-started?b_id=15145) guide for more information about Viber API.
 
