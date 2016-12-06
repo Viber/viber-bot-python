@@ -29,3 +29,7 @@ def create_request(request_dict):
 		raise Exception("event type '{0}' is not supported".format(request_dict['event']))
 
 	return EVENT_TYPE_TO_CLASS[request_dict['event']]().from_dict(request_dict)
+
+
+__all__ = ['ViberConversationStartedRequest', 'ViberDeliveredRequest', 'ViberFailedRequest', 'ViberMessageRequest',
+		   'ViberSeenRequest', 'ViberSubscribedRequest', 'ViberUnsubscribedRequest']

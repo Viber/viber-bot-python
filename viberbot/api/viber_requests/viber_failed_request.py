@@ -17,13 +17,16 @@ class ViberFailedRequest(ViberRequest):
 		self._desc = request_dict['desc']
 		return self
 
-	def get_meesage_token(self):
+	@property
+	def meesage_token(self):
 		return self._message_token
 
-	def get_user_id(self):
+	@property
+	def user_id(self):
 		return self._user_id
 
-	def get_desc(self):
+	@property
+	def desc(self):
 		return self._desc
 
 	@python_2_unicode_compatible

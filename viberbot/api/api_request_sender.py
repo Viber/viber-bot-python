@@ -13,7 +13,7 @@ class ApiRequestSender(object):
 
 	def set_webhook(self, url, webhook_events=None):
 		payload = {
-			'auth_token': self._bot_configuration.get_auth_token(),
+			'auth_token': self._bot_configuration.auth_token,
 			'url': url,
 		}
 
@@ -31,7 +31,7 @@ class ApiRequestSender(object):
 
 	def get_account_info(self):
 		payload = {
-			'auth_token': self._bot_configuration.get_auth_token()
+			'auth_token': self._bot_configuration.auth_token
 		}
 		return self.post_request(
 			endpoint=BOT_API_ENDPOINT.GET_ACCOUNT_INFO,

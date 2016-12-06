@@ -15,10 +15,12 @@ class ViberDeliveredRequest(ViberRequest):
 		self._user_id = request_dict['user_id']
 		return self
 
-	def get_meesage_token(self):
+	@property
+	def meesage_token(self):
 		return self._message_token
 
-	def get_user_id(self):
+	@property
+	def user_id(self):
 		return self._user_id
 
 	@python_2_unicode_compatible

@@ -12,10 +12,12 @@ class ViberRequest(object):
 			self._event_type = request_dict['event']
 		return self
 
-	def get_event_type(self):
+	@property
+	def event_type(self):
 		return self._event_type
 
-	def get_timestamp(self):
+	@property
+	def timestamp(self):
 		return self._timestamp
 
 	@python_2_unicode_compatible

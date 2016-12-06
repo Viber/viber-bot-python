@@ -21,13 +21,16 @@ class ViberMessageRequest(ViberRequest):
 		self._message_token = request_dict['message_token']
 		return self
 
-	def get_message(self):
+	@property
+	def message(self):
 		return self._message
 
-	def get_sender(self):
+	@property
+	def sender(self):
 		return self._sender
 
-	def get_message_token(self):
+	@property
+	def message_token(self):
 		return self._message_token
 
 	@python_2_unicode_compatible

@@ -34,16 +34,20 @@ class VideoMessage(Message):
 	def validate(self):
 		return self._media is not None and self._size is not None
 
-	def get_media(self):
+	@property
+	def media(self):
 		return self._media
 
-	def get_thumbnail(self):
+	@property
+	def thumbnail(self):
 		return self._thumbnail
 
-	def get_size(self):
+	@property
+	def size(self):
 		return self._size
 
-	def get_duration(self):
+	@property
+	def duration(self):
 		return self._duration
 
 	@python_2_unicode_compatible

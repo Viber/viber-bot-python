@@ -21,7 +21,8 @@ class LocationMessage(Message):
 			self._location = Location().from_dict(message_data['location'])
 		return self
 
-	def get_location(self):
+	@property
+	def location(self):
 		return self._location
 
 	def validate(self):

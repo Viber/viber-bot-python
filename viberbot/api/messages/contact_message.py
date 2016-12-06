@@ -21,13 +21,14 @@ class ContactMessage(Message):
 			self._contact = Contact().from_dict(message_data['contact'])
 		return self
 
-	def get_contact(self):
+	@property
+	def contact(self):
 		return self._contact
 
 	def validate(self):
 		return self._contact is not None \
-			   and self._contact.get_name() is not None \
-			   and self._contact.get_phone_number() is not None
+			   and self._contact.name is not None \
+			   and self._contact.phone_number is not None
 
 	@python_2_unicode_compatible
 	def __str__(self):

@@ -87,11 +87,13 @@ All the Message types are located in 'viber.api.messages' package.
 Here's some examples
 
 ```python
-from viberbot.api.messages.text_message import TextMessage
-from viberbot.api.messages.contact_message import ContactMessage
+from viberbot.api.messages import (
+	TextMessage,
+	ContactMessage,
+	PictureMessage,
+	VideoMessage
+)
 from viberbot.api.messages.data_types.contact import Contact
-from viberbot.api.messages.picture_message import PictureMessage
-from viberbot.api.messages.video_message import VideoMessage
 
 # creation of text message
 text_message = TextMessage(text="sample text message!")
@@ -155,13 +157,13 @@ def incoming():
 	viber_request = viber.parse_request(request.get_data())
 
 	if isinstance(viber_request, ViberMessageRequest):
-		message = viber_request.get_message()
+		message = viber_request.message
 		# lets echo back
-		viber.send_messages(viber_request.get_sender().get_id(), [
+		viber.send_messages(viber_request.sender.id, [
 			message
 		])
 	elif isinstance(viber_request, ViberSubscribedRequest):
-		viber.send_messages(viber_request.get_user().get_id(), [
+		viber.send_messages(viber_request.get_user.id, [
 			TextMessage(text="thanks for subscribing!")
 		])
 	elif isinstance(viber_request, ViberFailedRequest):
@@ -275,8 +277,8 @@ Members:
 | timestamp | `long` | Epoch of request time |
 
 * [ViberRequest](#ViberRequest)
-    * .get_event_type() ⇒ `string`
-    * .get_timestamp() ⇒ `long`
+    * .event_type ⇒ `string`
+    * .timestamp ⇒ `long`
 
 All of the Request objects listed below are [listed in Viber developers site](https://developers.viber.com/customer/en/portal/articles/2541267-callbacks?b_id=15145)
 #### ViberConversationStartedRequest object
@@ -293,10 +295,10 @@ Members:
 | user | `UserProfile` | the user started the conversation [UserProfile](#UserProfile) |
 
 * [ViberConversationStartedRequest](#ViberConversationStartedRequest)
-    * get_message_token() ⇒ `string`
-    * get_type() ⇒ `string`
-    * get_context() ⇒ `string`
-    * get_user() ⇒ `UserProfile`
+    * message_token ⇒ `string`
+    * type ⇒ `string`
+    * context ⇒ `string`
+    * user ⇒ `UserProfile`
 
 #### ViberDeliveredRequest object
 Inherits from [ViberRequest](#ViberRequest)
@@ -310,8 +312,8 @@ Members:
 | user_id | `string` | Unique Viber user id |
 
 * [ViberDeliveredRequest](#ViberDeliveredRequest)
-    * get_message_token() ⇒ `string`
-    * get_user_id() ⇒ `string`
+    * message_token ⇒ `string`
+    * user_id ⇒ `string`
 
 #### ViberFailedRequest object
 Inherits from [ViberRequest](#ViberRequest)
@@ -326,9 +328,9 @@ Members:
 | desc | `string` | Failure description |
 
 * [ViberFailedRequest](#ViberFailedRequest)
-    * get_message_token() ⇒ `string`
-    * get_user_id() ⇒ `string`
-    * get_desc() ⇒ `string`
+    * message_token ⇒ `string`
+    * user_id ⇒ `string`
+    * desc ⇒ `string`
 
 #### ViberMessageRequest object
 Inherits from [ViberRequest](#ViberRequest)
@@ -343,9 +345,9 @@ Members:
 | sender | `UserProfile` | the user started the conversation [UserProfile](#UserProfile) |
 
 * [ViberMessageRequest](#ViberMessageRequest)
-    * get_message_token() ⇒ `string`
-    * get_message() ⇒ `Message`
-    * get_sender() ⇒ `UserProfile`
+    * message_token ⇒ `string`
+    * message ⇒ `Message`
+    * sender ⇒ `UserProfile`
 
 #### ViberSeenRequest object
 Inherits from [ViberRequest](#ViberRequest)
@@ -359,8 +361,8 @@ Members:
 | user_id | `string` | Unique Viber user id |
 
 * [ViberSeenRequest](#ViberSeenRequest)
-    * get_message_token() ⇒ `string`
-    * get_user_id() ⇒ `string`
+    * message_token ⇒ `string`
+    * user_id ⇒ `string`
 
 #### ViberSubscribedRequest object
 Inherits from [ViberRequest](#ViberRequest)
@@ -373,7 +375,7 @@ Members:
 | user | `UserProfile` | the user started the conversation [UserProfile](#UserProfile) |
 
 * [ViberSubscribedRequest](#ViberSubscribedRequest)
-    * get_user() ⇒ `UserProfile`
+    * user ⇒ `UserProfile`
 
 #### ViberUnsubscribedRequest object
 Inherits from [ViberRequest](#ViberRequest)
@@ -386,7 +388,7 @@ Members:
 | user_id | `string` | Unique Viber user id |
 
 * [ViberUnsubscribedRequest](#ViberUnsubscribedRequest)
-    * get_user_id() ⇒ `string`
+    * user_id ⇒ `string`
 
 <a name="UserProfile"></a>
 ### UserProfile object

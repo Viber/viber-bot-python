@@ -22,7 +22,8 @@ class TextMessage(Message):
 	def validate(self):
 		return self._text is not None
 
-	def get_text(self):
+	@property
+	def text(self):
 		return self._text
 
 	@python_2_unicode_compatible

@@ -18,7 +18,8 @@ class ViberSubscribedRequest(ViberRequest):
 								 request_dict['user']['language'])
 		return self
 
-	def get_user(self):
+	@property
+	def user(self):
 		return self._user
 
 	@python_2_unicode_compatible

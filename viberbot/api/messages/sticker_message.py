@@ -20,7 +20,8 @@ class StickerMessage(Message):
 			self._sticker_id = message_data['sticker_id']
 		return self
 
-	def get_sticker_id(self):
+	@property
+	def sticker_id(self):
 		return self._sticker_id
 
 	def validate(self):

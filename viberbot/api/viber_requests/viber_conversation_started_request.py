@@ -25,16 +25,20 @@ class ViberConversationStartedRequest(ViberRequest):
 								 request_dict['user']['language'])
 		return self
 
-	def get_user(self):
+	@property
+	def user(self):
 		return self._user
 
-	def get_type(self):
+	@property
+	def type(self):
 		return self._type
 
-	def get_context(self):
+	@property
+	def context(self):
 		return self._context
 
-	def get_message_token(self):
+	@property
+	def message_token(self):
 		return self._message_token
 
 	@python_2_unicode_compatible

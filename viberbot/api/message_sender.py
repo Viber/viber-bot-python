@@ -16,7 +16,7 @@ class MessageSender(object):
 
 		payload = message.to_dict()
 		payload.update({
-			'auth_token': self._bot_configuration.get_auth_token(),
+			'auth_token': self._bot_configuration.auth_token,
 			"receiver": to,
 			"sender": {
 				"name": sender_name,

@@ -26,10 +26,12 @@ class Location(object):
 			'lon': self._lon
 		}
 
-	def get_latitude(self):
+	@property
+	def latitude(self):
 		return self._lat
 
-	def get_longitude(self):
+	@property
+	def longitude(self):
 		return self._lon
 
 	def validate(self):
@@ -42,7 +44,7 @@ class Location(object):
 		return True
 
 	def __eq__(self, other):
-		return self._lat == other.get_latitude() and self._lon == other.get_longitude()
+		return self._lat == other.latitude and self._lon == other.longitude
 
 	@python_2_unicode_compatible
 	def __str__(self):

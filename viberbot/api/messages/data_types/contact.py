@@ -19,14 +19,16 @@ class Contact(object):
 			'phone_number': self._phone_number
 		}
 
-	def get_name(self):
+	@property
+	def name(self):
 		return self._name
 
-	def get_phone_number(self):
+	@property
+	def phone_number(self):
 		return self._phone_number
 
 	def __eq__(self, other):
-		return self._name == other.get_name() and self._phone_number == other.get_phone_number()
+		return self._name == other.name and self._phone_number == other.phone_number
 
 	@python_2_unicode_compatible
 	def __str__(self):

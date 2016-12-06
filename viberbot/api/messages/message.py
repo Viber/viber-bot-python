@@ -26,10 +26,12 @@ class Message(object):
 			self._keyboard = message_data['keyboard']
 		return self
 
-	def get_keyboard(self):
+	@property
+	def keyboard(self):
 		return self._keyboard
 
-	def get_tracking_data(self):
+	@property
+	def tracking_data(self):
 		return self._tracking_data
 
 	@abstractmethod

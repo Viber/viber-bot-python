@@ -16,11 +16,13 @@ class Api(object):
 		self._request_sender = ApiRequestSender(self._logger, VIBER_BOT_API_URL, bot_configuration)
 		self._message_sender = MessageSender(self._logger, self._request_sender, bot_configuration)
 
-	def get_name(self):
-		return self._bot_configuration.get_name()
+	@property
+	def name(self):
+		return self._bot_configuration.name
 
-	def get_avatar(self):
-		return self._bot_configuration.get_avatar()
+	@property
+	def avatar(self):
+		return self._bot_configuration.avatar
 
 	def set_webhook(self, url, webhook_events=None):
 		self._logger.debug(u"setting webhook to url: {0}".format(url))
@@ -59,13 +61,14 @@ class Api(object):
 		sent_messages_tokens = []
 
 		for message in messages:
-			token = self._message_sender.send_message(to, self._bot_configuration.get_name(), self._bot_configuration.get_avatar(), message)
+			token = self._message_sender.send_message(to, self._bot_configuration.name, self._bot_configuration.avatar, message)
 			sent_messages_tokens.append(token)
 
 		return sent_messages_tokens
 
 	def _calculate_message_signature(self, message):
-		return hmac.new(bytes(self._bot_configuration.get_auth_token().encode('ascii')),
+		return hmac.new(bytes(self._bot_configuration.auth_token.encode('ascii')),
 						msg=message,
-						digestmod=hashlib.sha256)\
+						digestmod=hashlib.sha256) \
 			.hexdigest()
+

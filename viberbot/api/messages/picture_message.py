@@ -30,13 +30,16 @@ class PictureMessage(Message):
 	def validate(self):
 		return self._text is not None and self._media is not None
 
-	def get_text(self):
+	@property
+	def text(self):
 		return self._text
 
-	def get_media(self):
+	@property
+	def media(self):
 		return self._media
 
-	def get_thumbnail(self):
+	@property
+	def thumbnail(self):
 		return self._thumbnail
 
 	@python_2_unicode_compatible

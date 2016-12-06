@@ -1,6 +1,5 @@
 from viberbot.api.messages.contact_message import ContactMessage
 from viberbot.api.messages.file_message import FileMessage
-from viberbot.api.messages.location_message import LocationMessage
 from viberbot.api.messages.picture_message import PictureMessage
 from viberbot.api.messages.sticker_message import StickerMessage
 from viberbot.api.messages.url_message import URLMessage
@@ -28,3 +27,7 @@ def get_message(message_dict):
 		raise Exception(u"message type '{0}' is not supported".format(message_dict['type']))
 
 	return MESSAGE_TYPE_TO_CLASS[message_dict['type']]().from_dict(message_dict)
+
+
+__all__ = ['TextMessage', 'ContactMessage', 'FileMessage', 'LocationMessage',
+		   'PictureMessage', 'StickerMessage', 'URLMessage', 'VideoMessage', 'MessageType']

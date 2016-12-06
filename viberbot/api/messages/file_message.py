@@ -27,13 +27,16 @@ class FileMessage(Message):
 			self._file_name = message_data['file_name']
 		return self
 
-	def get_media(self):
+	@property
+	def media(self):
 		return self._media
 
-	def get_size(self):
+	@property
+	def size(self):
 		return self._size
 
-	def get_file_name(self):
+	@property
+	def file_name(self):
 		return self._file_name
 
 	def validate(self):

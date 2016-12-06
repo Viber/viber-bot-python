@@ -4,11 +4,14 @@ class BotConfiguration(object):
 		self._name = name
 		self._avatar = avatar
 
-	def get_name(self):
+	@property
+	def name(self):
 		return self._name
 
-	def get_avatar(self):
+	@property
+	def avatar(self):
 		return self._avatar
 
-	def get_auth_token(self):
+	@property
+	def auth_token(self):
 		return self._auth_token

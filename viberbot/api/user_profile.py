@@ -9,19 +9,24 @@ class UserProfile(object):
 		self._country = country
 		self._language = language
 
-	def get_name(self):
+	@property
+	def name(self):
 		return self._name
 
-	def get_avatar(self):
+	@property
+	def avatar(self):
 		return self._avatar
 
-	def get_id(self):
+	@property
+	def id(self):
 		return self._id
 
-	def get_country(self):
+	@property
+	def country(self):
 		return self._country
 
-	def get_language(self):
+	@property
+	def language(self):
 		return self._language
 
 	@python_2_unicode_compatible
