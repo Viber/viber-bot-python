@@ -8,7 +8,7 @@ viberbot==0.1.3.7
 ```
 
 ## License
-This library is released under the terms of the Apache license. See [License](LICENSE.md) for more information.
+This library is released under the terms of the Apache 2.0 license. See [License](LICENSE.md) for more information.
 
 ## Library Prerequisites
 * python >= 2.7.0
