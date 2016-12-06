@@ -1,4 +1,4 @@
-# Viber Bot API
+# Viber Python Bot API
 Use this library to communicate with the Viber API to develop a bot for [Viber](https://developers.viber.com/).
 Please visit [Getting Started](https://developers.viber.com/customer/en/portal/articles/2567874-getting-started?b_id=15145) guide for more information about Viber API.
 
@@ -8,11 +8,11 @@ viberbot==0.1.3.7
 ```
 
 ## License
-This library is released under the terms of the Apache license. See [License](LICENSE.md) for more information.
+This library is released under the terms of the Apache 2.0 license. See [License](LICENSE.md) for more information.
 
 ## Library Prerequisites
 * python >= 2.7.0
-* [Viber Auth Token](https://developers.viber.com/customer/en/portal/articles/2554141-create-a-public-account?b_id=15145).
+* [Get your Viber Public Account authentication token](https://developers.viber.com/customer/en/portal/articles/2554141-create-a-public-account?b_id=15145).
 * Certification - You'll need a trusted (ca.pem) certificate, not self-signed. You can find one at [Let's Encrypt](https://letsencrypt.org/) or buy one.
 
 ## Let's get started!
