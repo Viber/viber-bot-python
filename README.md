@@ -170,7 +170,7 @@ if __name__ == "__main__":
 
 ```
 
-As you can see there's a bunch of Request types [here's a list of them](#RequestTypes).
+As you can see there's a bunch of Request types here's a list of them.
 
 ## Viber API
 ### Api class
@@ -269,7 +269,7 @@ tokens = viber.send_messages(to=viber_request.get_sender().get_id(),
 ### Request object
 | Param | Type | Notes |
 | --- | --- | --- |
-| event_type | `string` | according to [EventTypes](#EventTypes) |
+| event_type | `string` | according to EventTypes enum |
 | timestamp | `long` | Epoch of request time |
 
 * ViberRequest
