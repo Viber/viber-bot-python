@@ -7,7 +7,7 @@ This library is released under the terms of the Apache 2.0 license. See [License
 
 ## Library Prerequisites
 * python >= 2.7.0
-* [Get your Viber Public Account authentication token](getting-started.md).
+* Get your Viber Public Account authentication token. Your token is generated and provided to you during the Public Account creation process. As a Public Account admin, you can always find the account token in the "edit info" page.
 * Certification - You'll need a trusted (ca.pem) certificate, not self-signed. You can find one at [Let's Encrypt](https://letsencrypt.org/) or buy one.
 
 ## Let's get started!
