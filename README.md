@@ -37,8 +37,7 @@ viber = Api(bot_configuration)
 
 ### Create an HTTPS server
 Next thing you should do is starting a https server.
-and yes, as we said in the [Library Prerequisites](#Library Prerequisites) it has to be https server.
-create a server however you like, for example with Flask:
+and yes, as we said in the prerequisites it has to be https server. Create a server however you like, for example with Flask:
 
 ```python
 from flask import Flask, request, Response
@@ -191,7 +190,7 @@ As you can see there's a bunch of Request types here's a list of them.
 
 | Param | Type | Description |
 | --- | --- | --- |
-| bot_configuration | `object` | [BotConfiguration](#BotConfiguration) |
+| bot_configuration | `object` | BotConfiguration |
 
 <a name="set_webhook"></a>
 ### Api.set_webhook(url)
