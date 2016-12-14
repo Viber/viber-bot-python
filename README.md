@@ -177,7 +177,7 @@ As you can see there's a bunch of Request types [here's a list of them](#Request
 
 `from viber.api.api import Api`
 
-* [Api](#Api)
+* Api
     * [init(bot_configuration)](#new-Api())
     * [.set_webhook(url, webhook_events)](#set_webhook) ⇒ `None`
     * [.unset_webhook()](#unset_webhook) ⇒ `None`
@@ -272,7 +272,7 @@ tokens = viber.send_messages(to=viber_request.get_sender().get_id(),
 | event_type | `string` | according to [EventTypes](#EventTypes) |
 | timestamp | `long` | Epoch of request time |
 
-* [ViberRequest](#ViberRequest)
+* ViberRequest
     * .event_type ⇒ `string `
     * .timestamp ⇒ `long`
 
@@ -302,7 +302,7 @@ Inherits from [ViberRequest](#ViberRequest)
 | message_token | `string` | Unique ID of the message |
 | user_id | `string` | Unique Viber user id |
 
-* [ViberDeliveredRequest](#ViberDeliveredRequest)
+* ViberDeliveredRequest
     * message_token ⇒ `string`
     * user_id ⇒ `string`
 
@@ -316,7 +316,7 @@ Inherits from [ViberRequest](#ViberRequest)
 | user_id | `string` | Unique Viber user id |
 | desc | `string` | Failure description |
 
-* [ViberFailedRequest](#ViberFailedRequest)
+* ViberFailedRequest
     * message_token ⇒ `string`
     * user_id ⇒ `string`
     * desc ⇒ `string`
@@ -331,7 +331,7 @@ Inherits from [ViberRequest](#ViberRequest)
 | message | `Message` | `Message` object |
 | sender | `UserProfile` | the user started the conversation [UserProfile](#UserProfile) |
 
-* [ViberMessageRequest](#ViberMessageRequest)
+* ViberMessageRequest
     * message_token ⇒ `string`
     * message ⇒ `Message`
     * sender ⇒ `UserProfile`
@@ -345,7 +345,7 @@ Inherits from [ViberRequest](#ViberRequest)
 | message_token | `string` | Unique ID of the message |
 | user_id | `string` | Unique Viber user id |
 
-* [ViberSeenRequest](#ViberSeenRequest)
+* ViberSeenRequest
     * message_token ⇒ `string`
     * user_id ⇒ `string`
 
@@ -357,7 +357,7 @@ Inherits from [ViberRequest](#ViberRequest)
 | event_type | `string` | always equals to the value of EventType.SUBSCRIBED |
 | user | `UserProfile` | the user started the conversation [UserProfile](#UserProfile) |
 
-* [ViberSubscribedRequest](#ViberSubscribedRequest)
+* ViberSubscribedRequest
     * user ⇒ `UserProfile`
 
 #### ViberUnsubscribedRequest object
@@ -368,7 +368,7 @@ Inherits from [ViberRequest](#ViberRequest)
 | event_type | `string` | always equals to the value of EventType.UNSUBSCRIBED |
 | user_id | `string` | Unique Viber user id |
 
-* [ViberUnsubscribedRequest](#ViberUnsubscribedRequest)
+* ViberUnsubscribedRequest
     * get_user_id() ⇒ `string`
 
 <a name="UserProfile"></a>
