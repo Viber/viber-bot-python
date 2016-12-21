@@ -134,7 +134,7 @@ app = Flask(__name__)
 viber = Api(BotConfiguration(
     name='PythonSampleBot',
     avatar='http://site.com/avatar.jpg',
-    auth_token='451798a889a17401-865360a5474b3993-8fe73f00b019c611'
+    auth_token='445da6az1s345z78-dazcczb2542zv51a-e0vc5fva17480im9'
 ))
 
 
@@ -396,7 +396,7 @@ Inherits from [ViberRequest](#ViberRequest)
 
 | Param | Type | Description |
 | --- | --- | --- |
-| optionalKeyboard | `JSON` | [Writing Custom Keyboards](rest-bot-api.md#keyboards) |
+| optionalKeyboard | `JSON` | [Writing Custom Keyboards](http://dev.viber.com/api/rest-bot-api/index.html#keyboards) |
 | optionalTrackingData | `JSON` | Data to be saved on Viber Client device, and sent back each time message is recived |
 
 <a name="TextMessage"></a>
