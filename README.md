@@ -57,10 +57,10 @@ app.run(host='0.0.0.0', port=443, debug=True, ssl_context=context)
 
 ### Setting a webhook
 After the server is up and running you can set a webhook.
-Viber will push messages sent to this URL. Webserver should be internet-facing.
+Viber will push messages sent to this URL. web server should be internet-facing.
 
 ```python
-viber.set_webhook('https://mybotwebserver.com:443/')
+viber.set_webhook('https://mybotweb server.com:443/')
 ```
 
 ### Logging
@@ -196,13 +196,13 @@ As you can see there's a bunch of Request types here's a list of them.
 ### Api.set_webhook(url)
 | Param | Type | Description |
 | --- | --- | --- |
-| url | `string` | Your webserver url |
+| url | `string` | Your web server url |
 | webhook_events | `list` | optional list of subscribed events |
 
 Returns `None`. **Example**
 
 ```python
-viber.set_webhook('https://mywebserver.com/incoming')
+viber.set_webhook('https://myweb server.com/incoming')
 ```
 
 <a name="unset_webhook"></a>
