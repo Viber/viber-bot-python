@@ -18,7 +18,7 @@ Creating a basic Viber bot is simple:
 2. Create a Public Account and use the API key from [https://developers.viber.com]()
 3. Configure your bot as described in the documentation below
 4. Start your web server
-5. Call `set_webhook(url)` with your webserver url
+5. Call `set_webhook(url)` with your web server url
 
 ## A simple Echo Bot
 ### Firstly, let's import and configure our bot
@@ -56,7 +56,7 @@ app.run(host='0.0.0.0', port=443, debug=True, ssl_context=context)
 ```
 
 ### Setting a webhook
-After the server is up and kickin' you can set a webook.
+After the server is up and running you can set a webhook.
 Viber will push messages sent to this URL. Webserver should be internet-facing.
 
 ```python
@@ -91,7 +91,7 @@ from viberbot.api.messages.data_types.contact import Contact
 text_message = TextMessage(text="sample text message!")
 
 # creation of contact message
-contact = Contact(name="viber user", phone_number="0123456789")
+contact = Contact(name="Viber user", phone_number="0123456789")
 contact_message = ContactMessage(contact=contact)
 
 # creation of picture message
@@ -215,7 +215,7 @@ viber.unset_webhook()
 
 <a name="get_account_info"></a>
 ### Api.get_account_info()
-Returns an `object` ([Formmated from the following JSON](rest-bot-api.md#getAccountInfo)). **Example**
+Returns an `object` [with the following JSON](https://developers.viber.com/api/rest-bot-api/index.html#get-account-info). **Example**
 
 ```python
 account_info = viber.get_account_info()
@@ -396,8 +396,8 @@ Inherits from [ViberRequest](#ViberRequest)
 
 | Param | Type | Description |
 | --- | --- | --- |
-| optionalKeyboard | `JSON` | [Writing Custom Keyboards](http://dev.viber.com/api/rest-bot-api/index.html#keyboards) |
-| optionalTrackingData | `JSON` | Data to be saved on Viber Client device, and sent back each time message is recived |
+| optionalKeyboard | `JSON` | [Writing Custom Keyboards](https://developers.viber.com/tools/keyboards/index.html) |
+| optionalTrackingData | `JSON` | Data to be saved on Viber Client device, and sent back each time message is received |
 
 <a name="TextMessage"></a>
 #### TextMessage object
@@ -428,7 +428,7 @@ message = URLMessage(media="http://my.siteurl.com");
 ```python
 from viber.api.messages.data_types.contact import Contact
 
-contact = Contact(name="viber user", phone_number="+972488467539")
+contact = Contact(name="Viber user", phone_number="+972488467539")
 contact_message = ContactMessage(contact=contact)
 ```
 
@@ -441,7 +441,7 @@ contact_message = ContactMessage(contact=contact)
 | thumbnail | `string` |  |
 
 ```python
-message = PictureMessage(media="http://www.thehindubusinessline.com/multimedia/dynamic/01458/viber_logo_JPG_1458024f.jpg", text="viber logo")
+message = PictureMessage(media="http://www.thehindubusinessline.com/multimedia/dynamic/01458/viber_logo_JPG_1458024f.jpg", text="Viber logo")
 ```
 
 <a name="VideoMessage"></a>
