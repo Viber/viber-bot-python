@@ -488,7 +488,6 @@ message = StickerMessage(sticker_id=40100);
 | size | `long` |
 | file_name | `string` |
 
-```javascript
-const message = new FileMessage(media=url, size=sizeInBytes, file_name=file_name);
-console.log(`${message.url}, ${message.sizeInBytes}, ${message.filename}`);
+```python
+message = FileMessage(media=url, size=sizeInBytes, file_name=file_name)
 ```
