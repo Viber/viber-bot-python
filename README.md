@@ -110,6 +110,7 @@ Have you noticed how we created the TextMessage? There's a all bunch of message 
 * [Video Message](#VideoMessage)
 * [Location Message](#LocationMessage)
 * [Sticker Message](#StickerMessage)
+* [FileMessage](#FileMessage)
 
 Creating them is easy! Every message object has it's own unique constructor corresponding to it's API implementation, click on them to see it!
 Check out the full API documentation for more advanced uses.
