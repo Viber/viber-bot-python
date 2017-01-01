@@ -478,7 +478,7 @@ location_message = LocationMessage(location=location)
 | sticker_id | `int` |
 
 ```python
-message = StickerMessage(sticker_id=40100);
+message = StickerMessage(sticker_id=40100)
 ```
 
 <a name="FileMessage"></a>
