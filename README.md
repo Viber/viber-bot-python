@@ -479,3 +479,16 @@ location_message = LocationMessage(location=location)
 ```python
 message = StickerMessage(sticker_id=40100);
 ```
+
+<a name="FileMessage"></a>
+#### FileMessage object
+| Member | Type
+| --- | --- |
+| media | `string` |
+| size | `long` |
+| file_name | `string` |
+
+```javascript
+const message = new FileMessage(media=url, size=sizeInBytes, file_name=file_name);
+console.log(`${message.url}, ${message.sizeInBytes}, ${message.filename}`);
+```
