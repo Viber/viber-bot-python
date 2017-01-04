@@ -110,7 +110,6 @@ Have you noticed how we created the TextMessage? There's a all bunch of message 
 * [Video Message](#VideoMessage)
 * [Location Message](#LocationMessage)
 * [Sticker Message](#StickerMessage)
-* [File Message](#FileMessage)
 
 Creating them is easy! Every message object has it's own unique constructor corresponding to it's API implementation, click on them to see it!
 Check out the full API documentation for more advanced uses.
@@ -478,7 +477,7 @@ location_message = LocationMessage(location=location)
 | sticker_id | `int` |
 
 ```python
-message = StickerMessage(sticker_id=40100)
+message = StickerMessage(sticker_id=40100);
 ```
 
 <a name="FileMessage"></a>
@@ -492,3 +491,6 @@ message = StickerMessage(sticker_id=40100)
 ```python
 message = FileMessage(media=url, size=sizeInBytes, file_name=file_name)
 ```
+
+## Community
+Join the conversation on **[Gitter] (https://gitter.im/viber/bot-python)**.
