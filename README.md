@@ -182,12 +182,14 @@ As you can see there's a bunch of Request types [here's a list of them](# Reques
 
 * [Api](#Api)
     * [init(bot_configuration)](#new-Api())
-    * [.set_webhook(url, webhook_events)](#set_webhook) ⇒ `None`
+    * [.set_webhook(url, webhook_events)](#set_webhook) ⇒ `List of registered event_types`
     * [.unset_webhook()](#unset_webhook) ⇒ `None`
     * [.get_account_info()](#get_account_info) ⇒ `object`
     * [.verify_signature(request_data, signature)](#verify_signature) ⇒ `boolean`
     * [.parse_request(request_data)](#parse_request) ⇒ `ViberRequest`
     * [.send_messages(to, messages)](#send_messages) ⇒ `list of message tokens sent`
+    * [.get_online(viber_user_ids)](#get_online) ⇒ `dictionary of users status`
+    * [.get_user_details(viber_user_id)](#get_user_details) ⇒ `dictionary of user's data`
 
 <a name="new-Api()"></a>
 ### New Api()
@@ -203,9 +205,9 @@ As you can see there's a bunch of Request types [here's a list of them](# Reques
 | url | `string` | Your webserver url |
 | webhook_events | `list` | optional list of subscribed events |
 
-Returns `None`. **Example**
+Returns `List of registered event_types`. **Example**
 ```python
-viber.set_webhook('https://mywebserver.com/incoming')
+event_types = viber.set_webhook('https://mywebserver.com/incoming')
 ```
 
 <a name="unset_webhook"></a>
@@ -263,6 +265,29 @@ tokens = viber.send_messages(to=viber_request.get_sender().get_id(),
 			     messages=[TextMessage(text="sample message")])
 ```
 
+<a name="get_online"></a>
+### Api.get_online(viber_user_ids)
+| Param | Type | Description |
+| --- | --- | --- |
+| viber_user_ids | `array of strings` | Array of Viber user ids |
+
+Returns a `dictionary of users`.
+
+```python
+users = Api.get_online(["user1id", "user2id"])
+```
+
+<a name="get_user_details"></a>
+### Api.get_user_details(viber_user_id)
+| Param | Type | Description |
+| --- | --- | --- |
+| viber_user_ids | `string` | Viber user id |
+
+Returns a `dictionary of user's data`.
+
+```python
+user_data = Api.get_user_details("userid")
+```
 
 <a name="ViberRequest"></a>
 ### Request object
@@ -446,7 +471,7 @@ message = URLMessage(media="http://my.siteurl.com");
 ```python
 from viber.api.messages.data_types.contact import Contact
 
-contact = Contact(name="Viber user", phone_number="+972488467539")
+contact = Contact(name="Viber user", phone_number="+972488467539", avatar="http://link.to.avatar")
 contact_message = ContactMessage(contact=contact)
 ```
 
