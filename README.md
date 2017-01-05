@@ -60,7 +60,7 @@ After the server is up and running you can set a webhook.
 Viber will push messages sent to this URL. web server should be internet-facing.
 
 ```python
-viber.set_webhook('https://mybotweb server.com:443/')
+viber.set_webhook('https://mybotwebserver.com:443/')
 ```
 
 ### Logging
