@@ -369,7 +369,7 @@ Members:
 * [ViberMessageRequest](#ViberMessageRequest)
     * get_message_token() ⇒ `string`
     * get_message() ⇒ `Message`
-    * get_sender() ⇒ `UserProfile`
+    * get_sender() ⇒ `UserProfile`
 
 #### ViberSeenRequest object
 Inherits from [ViberRequest](#ViberRequest)
@@ -541,3 +541,6 @@ message = FileMessage(media=url, size=sizeInBytes, file_name=file_name)
 * [Forbidden file formats list](https://developers.viber.com/customer/en/portal/articles/2541358-forbidden-file-formats?b_id=15145).
 * List of [Error Codes](https://developers.viber.com/customer/en/portal/articles/2541337-error-codes?b_id=15145).
 * List of [Events and Callbacks](https://developers.viber.com/customer/en/portal/articles/2541267-callbacks?b_id=15145).
+
+## Community
+Join the conversation on **[Gitter] (https://gitter.im/viber/bot-python)**.
