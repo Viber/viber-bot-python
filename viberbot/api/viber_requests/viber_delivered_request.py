@@ -29,3 +29,4 @@ class ViberDeliveredRequest(ViberRequest):
 			.format(super(ViberDeliveredRequest, self).__str__(),
 					self._message_token,
 					self._user_id)
+

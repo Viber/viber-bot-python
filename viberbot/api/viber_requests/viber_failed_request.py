@@ -36,3 +36,5 @@ class ViberFailedRequest(ViberRequest):
 					self._message_token,
 					self._user_id,
 					self._desc)
+
+

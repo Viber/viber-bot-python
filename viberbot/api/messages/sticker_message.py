@@ -3,10 +3,9 @@ from viberbot.api.messages.message import Message
 from viberbot.api.messages.message_type import MessageType
 
 
-# currently not supported
 class StickerMessage(Message):
-	def __init__(self, tracking_data=None, keyboard=None, sticker_id=None):
-		super(StickerMessage, self).__init__(MessageType.STICKER, tracking_data, keyboard)
+	def __init__(self, tracking_data=None, keyboard=None, sticker_id=None, min_api_version=None):
+		super(StickerMessage, self).__init__(MessageType.STICKER, tracking_data, keyboard, min_api_version)
 		self._sticker_id = sticker_id
 
 	def to_dict(self):

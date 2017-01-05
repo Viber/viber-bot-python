@@ -15,9 +15,7 @@ class ViberMessageRequest(ViberRequest):
 	def from_dict(self, request_dict):
 		super(ViberMessageRequest, self).from_dict(request_dict)
 		self._message = messages.get_message(request_dict['message'])
-		self._sender = UserProfile(request_dict['sender']['name'],
-								   request_dict['sender']['avatar'],
-								   request_dict['sender']['id'])
+		self._sender = UserProfile().from_dict(request_dict['sender'])
 		self._message_token = request_dict['message_token']
 		return self
 
@@ -40,3 +38,5 @@ class ViberMessageRequest(ViberRequest):
 					self._message_token,
 					self._sender,
 					self._message)
+
+

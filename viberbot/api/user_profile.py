@@ -2,7 +2,7 @@ from future.utils import python_2_unicode_compatible
 
 
 class UserProfile(object):
-	def __init__(self, name, avatar, user_id, country=None, language=None):
+	def __init__(self, name=None, avatar=None, user_id=None, country=None, language=None):
 		self._name = name
 		self._avatar = avatar
 		self._id = user_id
@@ -28,6 +28,19 @@ class UserProfile(object):
 	@property
 	def language(self):
 		return self._language
+
+	def from_dict(self, user_dict):
+		if 'name' in user_dict:
+			self._name = user_dict['name']
+		if 'avatar' in user_dict:
+			self._avatar = user_dict['avatar']
+		if 'id' in user_dict:
+			self._id = user_dict['id']
+		if 'country' in user_dict:
+			self._country = user_dict['country']
+		if 'language' in user_dict:
+			self._language = user_dict['language']
+		return self
 
 	@python_2_unicode_compatible
 	def __str__(self):

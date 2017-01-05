@@ -1,13 +1,17 @@
-# Viber Python Bot API
-Use this library to develop a bot for Viber platform.
-The library is available on [GitHub](https://github.com/Viber/viber-bot-python) as well as a package on [PyPI](https://pypi.python.org/pypi/viberbot/).
+# Viber Bot API
+Use this library to communicate with the Viber API to develop a bot for [Viber](https://developers.viber.com/).
+Please visit [Getting Started](https://developers.viber.com/customer/en/portal/articles/2567874-getting-started?b_id=15145) guide for more information about Viber API.
+
+This package can be imported using pip by adding the following to your requirements.txt:
+
+viber==0.1.3.1
 
 ## License
-This library is released under the terms of the Apache 2.0 license. See [License](https://github.com/Viber/viber-bot-python/blob/master/LICENSE.md) for more information.
+This library is released under the terms of the Apache license. See [License](LICENSE.md) for more information.
 
 ## Library Prerequisites
 * python >= 2.7.0
-* Get your Viber Public Account authentication token. Your token is generated and provided to you during the Public Account creation process. As a Public Account admin, you can always find the account token in the "edit info" page.
+* [Viber Auth Token](https://developers.viber.com/customer/en/portal/articles/2554141-create-a-public-account?b_id=15145).
 * Certification - You'll need a trusted (ca.pem) certificate, not self-signed. You can find one at [Let's Encrypt](https://letsencrypt.org/) or buy one.
 
 ## Let's get started!
@@ -15,14 +19,13 @@ This library is released under the terms of the Apache 2.0 license. See [License
 Creating a basic Viber bot is simple:
 
 1. Import `viber.api` library to your project
-2. Create a Public Account and use the API key from [https://developers.viber.com]()
+2. Create a Public Account and use the API key from https://developers.viber.com/
 3. Configure your bot as described in the documentation below
 4. Start your web server
-5. Call `set_webhook(url)` with your web server url
+5. Call set_webhook(url) with your webserver url
 
 ## A simple Echo Bot
-### Firstly, let's import and configure our bot
-
+### Firstly, let's *import and configure* our bot:
 ```python
 from viber.api.api import Api
 from viber.api.bot_configuration import BotConfiguration
@@ -37,7 +40,8 @@ viber = Api(bot_configuration)
 
 ### Create an HTTPS server
 Next thing you should do is starting a https server.
-and yes, as we said in the prerequisites it has to be https server. Create a server however you like, for example with Flask:
+and yes, as we said in the [Library Prerequisites](#Library Prerequisites) it has to be https server.
+create a server however you like, for example with Flask:
 
 ```python
 from flask import Flask, request, Response
@@ -56,15 +60,16 @@ app.run(host='0.0.0.0', port=443, debug=True, ssl_context=context)
 ```
 
 ### Setting a webhook
-After the server is up and running you can set a webhook.
-Viber will push messages sent to this URL. web server should be internet-facing.
+After the server is up and kickin' you can set a webook.
+Viber will push messages sent to this URL. Webserver should be internet-facing.
 
 ```python
-viber.set_webhook('https://mybotweb server.com:443/')
+viber.set_webhook('https://mybotwebserver.com:443/')
 ```
 
 ### Logging
-This library uses the standard python logger. If you want to see its logs you can configure the logger
+This library uses the standard python logger.
+if you want to see its logs you can configure the logger
 
 ```python
 logger = logging.getLogger()
@@ -76,22 +81,22 @@ logger.addHandler(handler)
 ```
 
 ### Do you supply a basic types of messages?
-Well, funny you ask. Yes we do. All the Message types are located in `viber.api.messages` package. Here's some examples:
+Well, funny you ask. Yes we do.
+All the Message types are located in 'viber.api.messages' package.
+Here's some examples
 
 ```python
-from viberbot.api.messages import (
-    TextMessage,
-    ContactMessage,
-    PictureMessage,
-    VideoMessage
-)
-from viberbot.api.messages.data_types.contact import Contact
+from viber.api.messages.text_message import TextMessage
+from viber.api.messages.contact_message import ContactMessage
+from viber.api.messages.data_types.contact import Contact
+from viber.api.messages.picture_message import PictureMessage
+from viber.api.messages.video_message import VideoMessage
 
 # creation of text message
 text_message = TextMessage(text="sample text message!")
 
 # creation of contact message
-contact = Contact(name="Viber user", phone_number="0123456789")
+contact = Contact(name="viber user", phone_number="0123456789")
 contact_message = ContactMessage(contact=contact)
 
 # creation of picture message
@@ -101,7 +106,8 @@ picture_message = PictureMessage(text="my son started to eat all alone!", media=
 video_message = VideoMessage(media="http://mediaserver.com/video.mp4", size=4324)
 ```
 
-Have you noticed how we created the TextMessage? There's a all bunch of message types you should get familiar with.
+Have you noticed how we created the TextMessage? There's a all bunch of message types you should get familiar with, [here's a list of them](https://developers.viber.com/customer/en/portal/articles/2632255-send-message?b_id=15145).
+Every one of them is already modeled:
 
 * [Text Message](#TextMessage)
 * [Url Message](#UrlMessage)
@@ -115,13 +121,12 @@ Creating them is easy! Every message object has it's own unique constructor corr
 Check out the full API documentation for more advanced uses.
 
 ### Let's add it all up and reply with a message!
-
 ```python
 from flask import Flask, request, Response
-from viberbot import Api
-from viberbot.api.bot_configuration import BotConfiguration
-from viberbot.api.messages import VideoMessage
-from viberbot.api.messages.text_message import TextMessage
+from viber.api.api import Api
+from viber.api.bot_configuration import BotConfiguration
+from viber.api.messages import VideoMessage
+from viber.api.messages.text_message import TextMessage
 import logging
 
 from viber.api.viber_requests import ViberConversationStartedRequest
@@ -132,51 +137,50 @@ from viber.api.viber_requests import ViberUnsubscribedRequest
 
 app = Flask(__name__)
 viber = Api(BotConfiguration(
-    name='PythonSampleBot',
-    avatar='http://site.com/avatar.jpg',
-    auth_token='445da6az1s345z78-dazcczb2542zv51a-e0vc5fva17480im9'
+	name='PythonSampleBot',
+	avatar='http://site.com/avatar.jpg',
+	auth_token='451798a889a17401-865360a5474b3993-8fe73f00b019c611'
 ))
 
 
 @app.route('/', methods=['POST'])
 def incoming():
-    logger.debug("received request. post data: {0}".format(request.get_data()))
-    # every viber message is signed, you can verify the signature using this method
-    if not viber.verify_signature(request.get_data(), request.headers.get('X-Viber-Content-Signature')):
-        return Response(status=403)
+	logger.debug("received request. post data: {0}".format(request.get_data()))
+	# every viber message is signed, you can verify the signature using this method
+	if not viber.verify_signature(request.get_data(), request.headers.get('X-Viber-Content-Signature')):
+		return Response(status=403)
 
-    # this library supplies a simple way to receive a request object
-    viber_request = viber.parse_request(request.get_data())
+	# this library supplies a simple way to receive a request object
+	viber_request = viber.parse_request(request.get_data())
 
-    if isinstance(viber_request, ViberMessageRequest):
-        message = viber_request.message
-        # lets echo back
-        viber.send_messages(viber_request.sender.id, [
-            message
-        ])
-    elif isinstance(viber_request, ViberSubscribedRequest):
-        viber.send_messages(viber_request.get_user.id, [
-            TextMessage(text="thanks for subscribing!")
-        ])
-    elif isinstance(viber_request, ViberFailedRequest):
-        logger.warn("client failed receiving message. failure: {0}".format(viber_request))
+	if isinstance(viber_request, ViberMessageRequest):
+		message = viber_request.get_message()
+		# lets echo back
+		viber.send_messages(viber_request.get_sender().get_id(), [
+			message
+		])
+	elif isinstance(viber_request, ViberSubscribedRequest):
+		viber.send_messages(viber_request.get_user().get_id(), [
+			TextMessage(text="thanks for subscribing!")
+		])
+	elif isinstance(viber_request, ViberFailedRequest):
+		logger.warn("client failed receiving message. failure: {0}".format(viber_request))
 
-    return Response(status=200)
+	return Response(status=200)
 
 if __name__ == "__main__":
-    context = ('server.crt', 'server.key')
-    app.run(host='0.0.0.0', port=443, debug=True, ssl_context=context)
+	context = ('server.crt', 'server.key')
+	app.run(host='0.0.0.0', port=443, debug=True, ssl_context=context)
 
 ```
 
-As you can see there's a bunch of Request types here's a list of them.
+As you can see there's a bunch of Request types [here's a list of them](# RequestTypes).
 
 ## Viber API
 ### Api class
-
 `from viber.api.api import Api`
 
-* Api
+* [Api](#Api)
     * [init(bot_configuration)](#new-Api())
     * [.set_webhook(url, webhook_events)](#set_webhook) ⇒ `None`
     * [.unset_webhook()](#unset_webhook) ⇒ `None`
@@ -190,33 +194,30 @@ As you can see there's a bunch of Request types here's a list of them.
 
 | Param | Type | Description |
 | --- | --- | --- |
-| bot_configuration | `object` | BotConfiguration |
+| bot_configuration | `object` | [BotConfiguration](#BotConfiguration) |
 
 <a name="set_webhook"></a>
 ### Api.set_webhook(url)
 | Param | Type | Description |
 | --- | --- | --- |
-| url | `string` | Your web server url |
+| url | `string` | Your webserver url |
 | webhook_events | `list` | optional list of subscribed events |
 
 Returns `None`. **Example**
-
 ```python
-viber.set_webhook('https://myweb server.com/incoming')
+viber.set_webhook('https://mywebserver.com/incoming')
 ```
 
 <a name="unset_webhook"></a>
 ### Api.unset_webhook()
 Returns `None`. **Example**
-
 ```python
 viber.unset_webhook()
 ```
 
 <a name="get_account_info"></a>
 ### Api.get_account_info()
-Returns an `object` [with the following JSON](https://developers.viber.com/api/rest-bot-api/index.html#get-account-info). **Example**
-
+Returns an `object` ([Formmated from the following JSON](https://developers.viber.com/customer/en/portal/articles/2541122-get-account-info?b_id=15145)). **Example**
 ```python
 account_info = viber.get_account_info()
 ```
@@ -230,7 +231,6 @@ account_info = viber.get_account_info()
 
 
 Returns a `boolean` suggesting if the signature is valid. **Example**
-
 ```python
 if not viber.verify_signature(request.get_data(), request.headers.get('X-Viber-Content-Signature')):
 	return Response(status=403)
@@ -258,25 +258,30 @@ viber_request = viber.parse_request(request.get_data())
 | messages | `list` | list of `Message` objects |
 
 Returns `list` of message tokens of the messages sent. **Example**
-
 ```python
 tokens = viber.send_messages(to=viber_request.get_sender().get_id(),
 			     messages=[TextMessage(text="sample message")])
 ```
 
+
 <a name="ViberRequest"></a>
 ### Request object
+Members:
+
 | Param | Type | Notes |
 | --- | --- | --- |
-| event_type | `string` | according to EventTypes enum |
+| event_type | `string` | according to [EventTypes](#EventTypes) |
 | timestamp | `long` | Epoch of request time |
 
-* ViberRequest
-    * .event_type ⇒ `string `
-    * .timestamp ⇒ `long`
+* [ViberRequest](#ViberRequest)
+    * .get_event_type() ⇒ `string`
+    * .get_timestamp() ⇒ `long`
 
+All of the Request objects listed below are [listed in Viber developers site](https://developers.viber.com/customer/en/portal/articles/2541267-callbacks?b_id=15145)
 #### ViberConversationStartedRequest object
-Inherits from [ViberRequest](#ViberRequest)
+inherits from [ViberRequest](#ViberRequest)
+
+Members:
 
 | Param | Type | Notes |
 | --- | --- | --- |
@@ -287,13 +292,15 @@ Inherits from [ViberRequest](#ViberRequest)
 | user | `UserProfile` | the user started the conversation [UserProfile](#UserProfile) |
 
 * [ViberConversationStartedRequest](#ViberConversationStartedRequest)
-    * message_token ⇒ `string`
-    * type ⇒ `string`
-    * context ⇒ `string`
-    * user ⇒ `UserProfile`
+    * get_message_token() ⇒ `string`
+    * get_type() ⇒ `string`
+    * get_context() ⇒ `string`
+    * get_user() ⇒ `UserProfile`
 
 #### ViberDeliveredRequest object
 Inherits from [ViberRequest](#ViberRequest)
+
+Members:
 
 | Param | Type | Notes |
 | --- | --- | --- |
@@ -301,12 +308,14 @@ Inherits from [ViberRequest](#ViberRequest)
 | message_token | `string` | Unique ID of the message |
 | user_id | `string` | Unique Viber user id |
 
-* ViberDeliveredRequest
-    * message_token ⇒ `string`
-    * user_id ⇒ `string`
+* [ViberDeliveredRequest](#ViberDeliveredRequest)
+    * get_message_token() ⇒ `string`
+    * get_user_id() ⇒ `string`
 
 #### ViberFailedRequest object
 Inherits from [ViberRequest](#ViberRequest)
+
+Members:
 
 | Param | Type | Notes |
 | --- | --- | --- |
@@ -315,13 +324,15 @@ Inherits from [ViberRequest](#ViberRequest)
 | user_id | `string` | Unique Viber user id |
 | desc | `string` | Failure description |
 
-* ViberFailedRequest
-    * message_token ⇒ `string`
-    * user_id ⇒ `string`
-    * desc ⇒ `string`
+* [ViberFailedRequest](#ViberFailedRequest)
+    * get_message_token() ⇒ `string`
+    * get_user_id() ⇒ `string`
+    * get_desc() ⇒ `string`
 
 #### ViberMessageRequest object
 Inherits from [ViberRequest](#ViberRequest)
+
+Members:
 
 | Param | Type | Notes |
 | --- | --- | --- |
@@ -330,13 +341,15 @@ Inherits from [ViberRequest](#ViberRequest)
 | message | `Message` | `Message` object |
 | sender | `UserProfile` | the user started the conversation [UserProfile](#UserProfile) |
 
-* ViberMessageRequest
-    * message_token ⇒ `string`
-    * message ⇒ `Message`
-    * sender ⇒ `UserProfile`
+* [ViberMessageRequest](#ViberMessageRequest)
+    * get_message_token() ⇒ `string`
+    * get_message() ⇒ `Message`
+    * get_sender() ⇒ `UserProfile`
 
 #### ViberSeenRequest object
 Inherits from [ViberRequest](#ViberRequest)
+
+Members:
 
 | Param | Type | Notes |
 | --- | --- | --- |
@@ -344,34 +357,39 @@ Inherits from [ViberRequest](#ViberRequest)
 | message_token | `string` | Unique ID of the message |
 | user_id | `string` | Unique Viber user id |
 
-* ViberSeenRequest
-    * message_token ⇒ `string`
-    * user_id ⇒ `string`
+* [ViberSeenRequest](#ViberSeenRequest)
+    * get_message_token() ⇒ `string`
+    * get_user_id() ⇒ `string`
 
 #### ViberSubscribedRequest object
 Inherits from [ViberRequest](#ViberRequest)
+
+Members:
 
 | Param | Type | Notes |
 | --- | --- | --- |
 | event_type | `string` | always equals to the value of EventType.SUBSCRIBED |
 | user | `UserProfile` | the user started the conversation [UserProfile](#UserProfile) |
 
-* ViberSubscribedRequest
-    * user ⇒ `UserProfile`
+* [ViberSubscribedRequest](#ViberSubscribedRequest)
+    * get_user() ⇒ `UserProfile`
 
 #### ViberUnsubscribedRequest object
 Inherits from [ViberRequest](#ViberRequest)
+
+Members:
 
 | Param | Type | Notes |
 | --- | --- | --- |
 | event_type | `string` | always equals to the value of EventType.UNSUBSCRIBED |
 | user_id | `string` | Unique Viber user id |
 
-* ViberUnsubscribedRequest
+* [ViberUnsubscribedRequest](#ViberUnsubscribedRequest)
     * get_user_id() ⇒ `string`
 
 <a name="UserProfile"></a>
 ### UserProfile object
+Members:
 
 | Param | Type | Notes |
 | --- | --- | --- |
@@ -452,6 +470,7 @@ message = PictureMessage(media="http://www.thehindubusinessline.com/multimedia/d
 | size | `int` |  |
 | thumbnail | `string` |  |
 | duration | `int` |  |
+| text | `string` |  |
 
 ```python
 message = VideoMessage(media="http://site.com/video.mp4", size=21499)
@@ -492,5 +511,8 @@ message = StickerMessage(sticker_id=40100);
 message = FileMessage(media=url, size=sizeInBytes, file_name=file_name)
 ```
 
-## Community
-Join the conversation on **[Gitter] (https://gitter.im/viber/bot-python)**.
+## Useful links:
+* Writing a custom keyboard JSON [described here](https://developers.viber.com/customer/en/portal/articles/2567880-keyboards?b_id=15145).
+* [Forbidden file formats list](https://developers.viber.com/customer/en/portal/articles/2541358-forbidden-file-formats?b_id=15145).
+* List of [Error Codes](https://developers.viber.com/customer/en/portal/articles/2541337-error-codes?b_id=15145).
+* List of [Events and Callbacks](https://developers.viber.com/customer/en/portal/articles/2541267-callbacks?b_id=15145).

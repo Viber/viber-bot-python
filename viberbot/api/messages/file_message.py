@@ -4,8 +4,8 @@ from viberbot.api.messages.message_type import MessageType
 
 
 class FileMessage(Message):
-	def __init__(self, tracking_data=None, keyboard=None, media=None, size=None, file_name=None):
-		super(FileMessage, self).__init__(MessageType.FILE, tracking_data, keyboard)
+	def __init__(self, tracking_data=None, keyboard=None, media=None, size=None, file_name=None, min_api_version=None):
+		super(FileMessage, self).__init__(MessageType.FILE, tracking_data, keyboard, min_api_version)
 		self._media = media
 		self._size = size
 		self._file_name = file_name

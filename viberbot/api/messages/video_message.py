@@ -4,12 +4,13 @@ from viberbot.api.messages.message_type import MessageType
 
 
 class VideoMessage(Message):
-	def __init__(self, tracking_data=None, keyboard=None, media=None, thumbnail=None, size=None, duration=None):
-		super(VideoMessage, self).__init__(MessageType.VIDEO, tracking_data, keyboard)
+	def __init__(self, tracking_data=None, keyboard=None, media=None, thumbnail=None, size=None, text=None, duration=None, min_api_version=None):
+		super(VideoMessage, self).__init__(MessageType.VIDEO, tracking_data, keyboard, min_api_version)
 		self._media = media
 		self._thumbnail = thumbnail
 		self._size = size
 		self._duration = duration
+		self._text = text
 
 	def to_dict(self):
 		message_data = super(VideoMessage, self).to_dict()
@@ -17,6 +18,7 @@ class VideoMessage(Message):
 		message_data['thumbnail'] = self._thumbnail
 		message_data['size'] = self._size
 		message_data['duration'] = self._duration
+		message_data['text'] = self._text
 		return message_data
 
 	def from_dict(self, message_data):
@@ -29,6 +31,8 @@ class VideoMessage(Message):
 			self._size = message_data['size']
 		if 'duration' in message_data:
 			self._duration = message_data['duration']
+		if 'text' in message_data:
+			self._text = message_data['text']
 		return self
 
 	def validate(self):
@@ -50,11 +54,16 @@ class VideoMessage(Message):
 	def duration(self):
 		return self._duration
 
+	@property
+	def text(self):
+		return self._text
+
 	@python_2_unicode_compatible
 	def __str__(self):
-		return u"VideoMessage [{0}, media={1}, thumbnail={2}, size={3}, duration={4}]".\
+		return u"VideoMessage [{0}, media={1}, thumbnail={2}, size={3}, duration={4} text={5}]".\
 			format(super(VideoMessage, self).__str__(),
 				   self._media,
 				   self._thumbnail,
 				   self._size,
-				   self._duration)
+				   self._duration,
+				   self._text)

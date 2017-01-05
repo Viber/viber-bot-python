@@ -29,6 +29,8 @@ class ApiRequestSender(object):
 		if not result['status'] == 0:
 			raise Exception(u"failed with status: {0}, message: {1}".format(result['status'], result['status_message']))
 
+		return result['event_types']
+
 	def get_account_info(self):
 		payload = {
 			'auth_token': self._bot_configuration.auth_token
@@ -50,3 +52,38 @@ class ApiRequestSender(object):
 			self._logger.error(u"unexpected Exception while trying to post request. error is: {0}"
 							   .format(traceback.format_exc()))
 			raise ex
+
+	def get_online_status(self, ids=[]):
+		if ids is None or not isinstance(ids, list) or len(ids) == 0:
+			raise Exception("missing parameter ids, should be a list of viber memberIds")
+
+		payload = {
+			'auth_token': self._bot_configuration.auth_token,
+			'ids': ids
+		}
+		result = self.post_request(
+			endpoint=BOT_API_ENDPOINT.GET_ONLINE,
+			payload=json.dumps(payload))
+
+		if not result['status'] == 0:
+			raise Exception(u"failed with status: {0}, message: {1}".format(result['status'], result['status_message']))
+
+		return result['users']
+
+	def get_user_details(self, user_id):
+		if user_id is None:
+			raise Exception("missing parameter id")
+
+		payload = {
+			'auth_token': self._bot_configuration.auth_token,
+			'id': user_id
+		}
+		result = self.post_request(
+			endpoint=BOT_API_ENDPOINT.GET_USER_DETAILS,
+			payload=json.dumps(payload))
+
+		if not result['status'] == 0:
+			raise Exception(u"failed with status: {0}, message: {1}".format(result['status'], result['status_message']))
+
+		return result['user']
+

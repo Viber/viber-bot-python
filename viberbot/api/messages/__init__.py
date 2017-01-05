@@ -15,7 +15,8 @@ MESSAGE_TYPE_TO_CLASS = {
 	MessageType.CONTACT: ContactMessage,
 	MessageType.FILE: FileMessage,
 	MessageType.TEXT: TextMessage,
-	MessageType.VIDEO: VideoMessage
+	MessageType.VIDEO: VideoMessage,
+	MessageType.STICKER: StickerMessage,
 }
 
 

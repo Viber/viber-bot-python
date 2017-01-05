@@ -5,8 +5,8 @@ from viberbot.api.messages.message_type import MessageType
 
 
 class ContactMessage(Message):
-	def __init__(self, tracking_data=None, keyboard=None, contact=None):
-		super(ContactMessage, self).__init__(MessageType.CONTACT, tracking_data, keyboard)
+	def __init__(self, tracking_data=None, keyboard=None, contact=None, min_api_version=None):
+		super(ContactMessage, self).__init__(MessageType.CONTACT, tracking_data, keyboard, min_api_version)
 		self._contact = contact
 
 	def to_dict(self):

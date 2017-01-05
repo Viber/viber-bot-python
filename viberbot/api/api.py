@@ -32,6 +32,12 @@ class Api(object):
 		self._logger.debug("unsetting webhook")
 		return self._request_sender.set_webhook('')
 
+	def get_online(self, ids):
+		return self._request_sender.get_online_status(ids)
+
+	def get_user_details(self, user_id):
+		return self._request_sender.get_user_details(user_id)
+
 	def get_account_info(self):
 		self._logger.debug("requesting account info")
 		account_info = self._request_sender.get_account_info()
@@ -69,6 +75,6 @@ class Api(object):
 	def _calculate_message_signature(self, message):
 		return hmac.new(bytes(self._bot_configuration.auth_token.encode('ascii')),
 						msg=message,
-						digestmod=hashlib.sha256) \
+						digestmod=hashlib.sha256)\
 			.hexdigest()
 

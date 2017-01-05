@@ -5,8 +5,8 @@ from viberbot.api.messages.message_type import MessageType
 
 
 class LocationMessage(Message):
-	def __init__(self, tracking_data=None, keyboard=None, location=None):
-		super(LocationMessage, self).__init__(MessageType.LOCATION, tracking_data, keyboard)
+	def __init__(self, tracking_data=None, keyboard=None, location=None, min_api_version=None):
+		super(LocationMessage, self).__init__(MessageType.LOCATION, tracking_data, keyboard, min_api_version)
 		self._location = location
 
 	def to_dict(self):

@@ -4,8 +4,8 @@ from viberbot.api.messages.message_type import MessageType
 
 
 class PictureMessage(Message):
-	def __init__(self, tracking_data=None, keyboard=None, text=None, media=None, thumbnail=None):
-		super(PictureMessage, self).__init__(MessageType.PICTURE, tracking_data, keyboard)
+	def __init__(self, tracking_data=None, keyboard=None, text=None, media=None, thumbnail=None, min_api_version=None):
+		super(PictureMessage, self).__init__(MessageType.PICTURE, tracking_data, keyboard, min_api_version)
 		self._text = text or ''
 		self._media = media
 		self._thumbnail = thumbnail

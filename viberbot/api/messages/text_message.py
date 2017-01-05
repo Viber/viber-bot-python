@@ -4,8 +4,8 @@ from viberbot.api.messages.message_type import MessageType
 
 
 class TextMessage(Message):
-	def __init__(self, tracking_data=None, keyboard=None, text=None):
-		super(TextMessage, self).__init__(MessageType.TEXT, tracking_data, keyboard)
+	def __init__(self, tracking_data=None, keyboard=None, text=None, min_api_version=None):
+		super(TextMessage, self).__init__(MessageType.TEXT, tracking_data, keyboard, min_api_version)
 		self._text = text
 
 	def to_dict(self):

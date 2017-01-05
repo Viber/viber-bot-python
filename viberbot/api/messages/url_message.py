@@ -4,8 +4,8 @@ from viberbot.api.messages.message_type import MessageType
 
 
 class URLMessage(Message):
-	def __init__(self, tracking_data=None, keyboard=None, media=None):
-		super(URLMessage, self).__init__(MessageType.URL, tracking_data, keyboard)
+	def __init__(self, tracking_data=None, keyboard=None, media=None, min_api_version=None):
+		super(URLMessage, self).__init__(MessageType.URL, tracking_data, keyboard, min_api_version)
 		self._media = media
 
 	def to_dict(self):
