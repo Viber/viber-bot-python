@@ -1,17 +1,17 @@
 from flask import Flask, request, Response
-from viber.api.api import Api
-from viber.api.bot_configuration import BotConfiguration
-from viber.api.messages.text_message import TextMessage
+from viberbot import Api
+from viberbot.api.bot_configuration import BotConfiguration
+from viberbot.api.messages.text_message import TextMessage
+from viberbot.api.viber_requests import ViberConversationStartedRequest
+from viberbot.api.viber_requests import ViberFailedRequest
+from viberbot.api.viber_requests import ViberMessageRequest
+from viberbot.api.viber_requests import ViberSubscribedRequest
+from viberbot.api.viber_requests import ViberUnsubscribedRequest
+
 import time
 import logging
 import sched
 import threading
-
-from viber.api.viber_requests import ViberConversationStartedRequest
-from viber.api.viber_requests import ViberFailedRequest
-from viber.api.viber_requests import ViberMessageRequest
-from viber.api.viber_requests import ViberSubscribedRequest
-from viber.api.viber_requests import ViberUnsubscribedRequest
 
 logger = logging.getLogger()
 logger.setLevel(logging.DEBUG)
@@ -51,7 +51,6 @@ def incoming():
 
 def set_webhook(viber):
 	viber.set_webhook('https://mybotwebserver.com:8443/')
-
 
 if __name__ == "__main__":
 	scheduler = sched.scheduler(time.time, time.sleep)

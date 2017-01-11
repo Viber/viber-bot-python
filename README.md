@@ -14,18 +14,19 @@ This library is released under the terms of the Apache 2.0 license. See [License
 ### Installing
 Creating a basic Viber bot is simple:
 
-1. Import `viber.api` library to your project
-2. Create a Public Account and use the API key from [https://developers.viber.com]()
-3. Configure your bot as described in the documentation below
-4. Start your web server
-5. Call `set_webhook(url)` with your web server url
+1. Install the library though pip `pip install viberbot`
+2. Import `viberbot.api` library to your project
+3. Create a Public Account and use the API key from [https://developers.viber.com]()
+4. Configure your bot as described in the documentation below
+5. Start your web server
+6. Call `set_webhook(url)` with your web server url
 
 ## A simple Echo Bot
 ### Firstly, let's import and configure our bot
 
 ```python
-from viber.api.api import Api
-from viber.api.bot_configuration import BotConfiguration
+from viberbot import Api
+from viberbot.api.bot_configuration import BotConfiguration
 
 bot_configuration = BotConfiguration(
 	name='PythonSampleBot',
@@ -76,7 +77,7 @@ logger.addHandler(handler)
 ```
 
 ### Do you supply a basic types of messages?
-Well, funny you ask. Yes we do. All the Message types are located in `viber.api.messages` package. Here's some examples:
+Well, funny you ask. Yes we do. All the Message types are located in `viberbot.api.messages` package. Here's some examples:
 
 ```python
 from viberbot.api.messages import (
@@ -124,11 +125,11 @@ from viberbot.api.messages import VideoMessage
 from viberbot.api.messages.text_message import TextMessage
 import logging
 
-from viber.api.viber_requests import ViberConversationStartedRequest
-from viber.api.viber_requests import ViberFailedRequest
-from viber.api.viber_requests import ViberMessageRequest
-from viber.api.viber_requests import ViberSubscribedRequest
-from viber.api.viber_requests import ViberUnsubscribedRequest
+from viberbot.api.viber_requests import ViberConversationStartedRequest
+from viberbot.api.viber_requests import ViberFailedRequest
+from viberbot.api.viber_requests import ViberMessageRequest
+from viberbot.api.viber_requests import ViberSubscribedRequest
+from viberbot.api.viber_requests import ViberUnsubscribedRequest
 
 app = Flask(__name__)
 viber = Api(BotConfiguration(
@@ -174,7 +175,7 @@ As you can see there's a bunch of `Request` types here's a list of them.
 ## Viber API
 ### Api class
 
-`from viber.api.api import Api`
+`from viberbot import Api`
 
 * Api
     * [init(bot\_configuration)](#new-Api())
@@ -456,7 +457,7 @@ message = URLMessage(media="http://my.siteurl.com");
 | contact | `Contact` |
 
 ```python
-from viber.api.messages.data_types.contact import Contact
+from viberbot.api.messages.data_types.contact import Contact
 
 contact = Contact(name="Viber user", phone_number="+0015648979", avatar="http://link.to.avatar")
 contact_message = ContactMessage(contact=contact)
@@ -494,7 +495,7 @@ message = VideoMessage(media="http://site.com/video.mp4", size=21499)
 | location | `Location` |
 
 ```python
-from viber.api.messages.data_types.location import Location
+from viberbot.api.messages.data_types.location import Location
 
 location = Location(lat=0.0, lon=0.0)
 location_message = LocationMessage(location=location)
