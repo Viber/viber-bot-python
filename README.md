@@ -304,7 +304,7 @@ user_data = Api.get_user_details("userId")
 #### ViberConversationStartedRequest object
 Inherits from [ViberRequest](#ViberRequest)
 
-Conversation started event fires when a user opens a conversation with the PA using the “message” button (found on the PA’s info screen and Public Chat) or using a [deep link](https://developers.viber.com/tools/deep-links/index.html).
+Conversation started event fires when a user opens a conversation with the PA using the “message” button (found on the PA’s info screen) or using a [deep link](https://developers.viber.com/tools/deep-links/index.html).
 
 This event is **not** considered a subscribe event and doesn't allow the PA to send messages to the user; however, it will allow sending one "welcome message" to the user. 
 
