@@ -1,5 +1,7 @@
+from ..version import __version__
 
 VIBER_BOT_API_URL = "https://chatapi.viber.com/pa"
+VIBER_BOT_USER_AGENT = "ViberBot-Python/" + __version__
 
 
 class BOT_API_ENDPOINT(object):
@@ -8,3 +10,5 @@ class BOT_API_ENDPOINT(object):
 	SEND_MESSAGE = 'send_message'
 	GET_ONLINE = 'get_online'
 	GET_USER_DETAILS = 'get_user_details'
+
+
