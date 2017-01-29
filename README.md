@@ -285,7 +285,7 @@ users = Api.get_online(["user1id", "user2id"])
 | --- | --- | --- |
 | viber\_user\_ids | `string` | Viber user id |
 
-Returns a `dictionary of user's data`.
+The `get_user_details` function will fetch the details of a specific Viber user based on his unique user ID. The user ID can be obtained from the callbacks sent to the PA regrading user's actions. This request can be sent twice during a 12 hours period for each user ID.
 
 ```python
 user_data = Api.get_user_details("userId")
