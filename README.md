@@ -302,12 +302,13 @@ user_data = Api.get_user_details("userId")
     * .event\_type ⇒ `string `
     * .timestamp ⇒ `long`
 
+<a name="ConversationStarted"></a>
 #### ViberConversationStartedRequest object
 Inherits from [ViberRequest](#ViberRequest)
 
 Conversation started event fires when a user opens a conversation with the PA using the “message” button (found on the PA’s info screen) or using a [deep link](https://developers.viber.com/tools/deep-links/index.html).
 
-This event is **not** considered a subscribe event and doesn't allow the PA to send messages to the user; however, it will allow sending one "welcome message" to the user. 
+This event is **not** considered a subscribe event and doesn't allow the PA to send messages to the user; however, it will allow sending one "welcome message" to the user. See [sending a welcome message](#SendingWelcomeMessage) below for more information. 
 
 | Param | Type | Notes |
 | --- | --- | --- |
@@ -521,6 +522,35 @@ message = StickerMessage(sticker_id=40100);
 
 ```python
 message = FileMessage(media=url, size=sizeInBytes, file_name=file_name)
+```
+
+<a name="SendingWelcomeMessage"></a>
+### Sending a welcome message
+The Public Accounts API allows sending messages to users only after they subscribe to the PA. However, Viber will allow the PA to send one "welcome message" to a user as the user opens the conversation, before the user subscribes.
+
+The welcome message will be sent as a response to a conversation_started callback, which will be received from Viber once the user opens the conversation with the Public Account. To learn more about this event and when is it triggered see [`Conversation started`](#ConversationStarted) in the Callbacks section.
+
+#### Welcome message flow
+Sending a welcome message will be done according to the following flow:
+
+1. User opens 1-on-1 conversation with PA.
+2. Viber server send “conversation_started” even to PA’s webhook.
+3. PA receives the “conversation_started” and responds with an HTTP response which includes the welcome message as the response body.
+
+The welcome message will be a JSON constructed according to the send_message requests structure, but without the `receiver` parameter. An example welcome message would look like this:
+
+```python
+
+@app.route('/', methods=['POST'])
+def incoming():
+	viber_request = viber.parse_request(request.get_data())
+
+	if isinstance(viber_request, ViberConversationStartedRequest) :
+		viber.send_messages(viber_request.get_user().get_id(), [
+			TextMessage(text="Welcome!")
+		])
+
+	return Response(status=200)
 ```
 
 ## Community
