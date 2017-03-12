@@ -345,7 +345,7 @@ Inherits from [ViberRequest](#ViberRequest)
 
 Conversation started event fires when a user opens a conversation with the PA using the “message” button (found on the PA’s info screen) or using a [deep link](https://developers.viber.com/tools/deep-links/index.html).
 
-This event is **not** considered a subscribe event and doesn't allow the PA to send messages to the user; however, it will allow sending one "welcome message" to the user. See [sending a welcome message](#SendingWelcomeMessage) below for more information.
+This event is **not** considered a subscribe event and doesn't allow the PA to send messages to the user; however, it will allow sending one "welcome message" to the user. See [sending a welcome message](#SendingWelcomeMessage) below for more information. 
 
 | Param | Type | Notes |
 | --- | --- | --- |
@@ -560,6 +560,32 @@ location = Location(lat=0.0, lon=0.0)
 location_message = LocationMessage(location=location)
 ```
 
+<a name="StickerMessage"></a>
+
+#### StickerMessage object
+
+| Member | Type
+| --- | --- |
+| sticker\_id | `int` |
+
+```python
+message = StickerMessage(sticker_id=40100);
+```
+
+<a name="FileMessage"></a>
+
+#### FileMessage object
+
+| Member | Type
+| --- | --- |
+| media | `string` |
+| size | `long` |
+| file\_name | `string` |
+
+```python
+message = FileMessage(media=url, size=sizeInBytes, file_name=file_name)
+```
+
 <a name="RichMediaMessage"></a>
 
 #### RichMediaMessage object
@@ -595,32 +621,6 @@ SAMPLE_RICH_MEDIA = """{
 SAMPLE_ALT_TEXT = "upgrade now!"
 
 message = RichMediaMessage(rich_media=SAMPLE_RICH_MEDIA, alt_text=SAMPLE_ALT_TEXT);
-```
-
-<a name="StickerMessage"></a>
-
-#### StickerMessage object
-
-| Member | Type
-| --- | --- |
-| sticker\_id | `int` |
-
-```python
-message = StickerMessage(sticker_id=40100);
-```
-
-<a name="FileMessage"></a>
-
-#### FileMessage object
-
-| Member | Type
-| --- | --- |
-| media | `string` |
-| size | `long` |
-| file\_name | `string` |
-
-```python
-message = FileMessage(media=url, size=sizeInBytes, file_name=file_name)
 ```
 
 <a name="SendingWelcomeMessage"></a>
