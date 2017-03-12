@@ -7,6 +7,7 @@ from viberbot.api.messages.video_message import VideoMessage
 from viberbot.api.messages.message_type import MessageType
 from viberbot.api.messages.text_message import TextMessage
 from viberbot.api.messages.location_message import LocationMessage
+from viberbot.api.messages.rich_media_message import RichMediaMessage
 
 MESSAGE_TYPE_TO_CLASS = {
 	MessageType.URL: URLMessage,
@@ -17,6 +18,7 @@ MESSAGE_TYPE_TO_CLASS = {
 	MessageType.TEXT: TextMessage,
 	MessageType.VIDEO: VideoMessage,
 	MessageType.STICKER: StickerMessage,
+	MessageType.RICH_MEDIA: RichMediaMessage
 }
 
 
@@ -31,4 +33,5 @@ def get_message(message_dict):
 
 
 __all__ = ['TextMessage', 'ContactMessage', 'FileMessage', 'LocationMessage',
-		   'PictureMessage', 'StickerMessage', 'URLMessage', 'VideoMessage', 'MessageType']
+		   'PictureMessage', 'StickerMessage', 'URLMessage', 'VideoMessage',
+		   'RichMediaMessage', 'MessageType']

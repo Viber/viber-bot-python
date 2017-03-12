@@ -3,11 +3,12 @@ from abc import abstractmethod
 
 
 class Message(object):
-	def __init__(self, message_type, tracking_data=None, keyboard=None, min_api_version=None):
+	def __init__(self, message_type, tracking_data=None, keyboard=None, min_api_version=None, alt_text=None):
 		self._tracking_data = tracking_data
 		self._keyboard = keyboard
 		self._message_type = message_type
 		self._min_api_version = min_api_version
+		self._alt_text = alt_text
 
 	@abstractmethod
 	def to_dict(self):
@@ -19,6 +20,8 @@ class Message(object):
 			message_data['keyboard'] = self._keyboard
 		if self._min_api_version:
 			message_data['min_api_version'] = self._min_api_version
+		if self._alt_text:
+			message_data['alt_text'] = self._alt_text
 		return message_data
 
 	@abstractmethod
@@ -52,4 +55,6 @@ class Message(object):
 
 	@python_2_unicode_compatible
 	def __str__(self):
-		return u"tracking_data={0}, keyboard={1}, min_api_version={2}".format(self._tracking_data, self._keyboard, self._min_api_version)
+		return u"tracking_data={0}, keyboard={1}, min_api_version={2}".format(self._tracking_data,
+																						   self._keyboard,
+																						   self._min_api_version)
