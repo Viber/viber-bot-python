@@ -3,6 +3,12 @@
 Use this library to develop a bot for Viber platform.
 The library is available on [GitHub](https://github.com/Viber/viber-bot-python) as well as a package on [PyPI](https://pypi.python.org/pypi/viberbot/).
 
+This package can be imported using pip by adding the following to your `requirements.txt`:
+
+```python
+viber==0.1.3.1
+```
+
 ## License
 
 This library is released under the terms of the Apache 2.0 license. See [License](https://github.com/Viber/viber-bot-python/blob/master/LICENSE.md) for more information.
@@ -60,7 +66,6 @@ def incoming():
 
 context = ('server.crt', 'server.key')
 app.run(host='0.0.0.0', port=443, debug=True, ssl_context=context)
-
 ```
 
 ### Setting a webhook
