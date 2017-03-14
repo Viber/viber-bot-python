@@ -110,7 +110,7 @@ contact = Contact(name="Viber user", phone_number="0123456789")
 contact_message = ContactMessage(contact=contact)
 
 # creation of picture message
-picture_message = PictureMessage(text="my son started to eat all alone!", media="http://site.com/son.jpg")
+picture_message = PictureMessage(text="Check this", media="http://site.com/img.jpg")
 
 # creation of video message
 video_message = VideoMessage(media="http://mediaserver.com/video.mp4", size=4324)
@@ -182,7 +182,6 @@ def incoming():
 if __name__ == "__main__":
     context = ('server.crt', 'server.key')
     app.run(host='0.0.0.0', port=443, debug=True, ssl_context=context)
-
 ```
 
 As you can see there's a bunch of `Request` types here's a list of them.
@@ -356,7 +355,7 @@ This event is **not** considered a subscribe event and doesn't allow the PA to s
 | user | `UserProfile` | the user started the conversation [UserProfile](#UserProfile) |
 | subscribed | `boolean` | Indicates whether a user is already subscribed |
 
-* [ViberConversationStartedRequest](#ViberConversationStartedRequest)
+* ViberConversationStartedRequest
     * message\_token ⇒ `string`
     * type ⇒ `string`
     * context ⇒ `string`
@@ -642,7 +641,6 @@ Sending a welcome message will be done according to the following flow:
 The welcome message will be a JSON constructed according to the send_message requests structure, but without the `receiver` parameter. An example welcome message would look like this:
 
 ```python
-
 @app.route('/', methods=['POST'])
 def incoming():
 	viber_request = viber.parse_request(request.get_data())
@@ -657,4 +655,4 @@ def incoming():
 
 ## Community
 
-Join the conversation on **[Gitter] (https://gitter.im/viber/bot-python)**.
+Join the conversation on **[Gitter](https://gitter.im/viber/bot-python)**.
