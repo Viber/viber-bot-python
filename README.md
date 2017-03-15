@@ -595,7 +595,6 @@ message = FileMessage(media=url, size=sizeInBytes, file_name=file_name)
 
 ```python
 SAMPLE_RICH_MEDIA = """{
-  "DefaultHeight": true,
   "BgColor": "#69C48A",
   "Buttons": [
     {
