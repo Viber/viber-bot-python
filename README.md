@@ -240,7 +240,7 @@ viber.unset_webhook()
 
 ### Api.get\_account\_info()
 
-Returns an `object` [with the following JSON](https://developers.viber.com/api/rest-bot-api/index.html#get-account-info). **Example**
+Returns an `object` [with the following JSON](https://developers.viber.com/docs/api/rest-bot-api/#get-account-info). **Example**
 
 ```python
 account_info = viber.get_account_info()
@@ -342,7 +342,7 @@ user_data = Api.get_user_details("userId")
 
 Inherits from [ViberRequest](#ViberRequest)
 
-Conversation started event fires when a user opens a conversation with the PA using the “message” button (found on the PA’s info screen) or using a [deep link](https://developers.viber.com/tools/deep-links/index.html).
+Conversation started event fires when a user opens a conversation with the PA using the “message” button (found on the PA’s info screen) or using a [deep link](https://developers.viber.com/docs/tools/deep-links/).
 
 This event is **not** considered a subscribe event and doesn't allow the PA to send messages to the user; however, it will allow sending one "welcome message" to the user. See [sending a welcome message](#SendingWelcomeMessage) below for more information. 
 
@@ -473,7 +473,7 @@ Inherits from [ViberRequest](#ViberRequest)
 
 | Param | Type | Description |
 | --- | --- | --- |
-| optionalKeyboard | `JSON` | [Writing Custom Keyboards](https://developers.viber.com/tools/keyboards/index.html) |
+| optionalKeyboard | `JSON` | [Writing Custom Keyboards](https://developers.viber.com/docs/tools/keyboards) |
 | optionalTrackingData | `JSON` | Data to be saved on Viber Client device, and sent back each time message is received |
 
 <a name="TextMessage"></a>
