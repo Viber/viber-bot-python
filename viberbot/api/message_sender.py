@@ -15,13 +15,14 @@ class MessageSender(object):
             raise Exception("failed validating message: {0}".format(message))
 
         payload = message.to_dict()
-        return payload.update({
+        payload.update({
             'auth_token': self._bot_configuration.auth_token,
             "sender": {
                 "name": sender_name,
                 "avatar": sender_avatar
             }
         })
+        return payload
 
     def send(self, payload, bot_api_endpoint):
         self._logger.debug(u"going to send message: {0}".format(payload))
