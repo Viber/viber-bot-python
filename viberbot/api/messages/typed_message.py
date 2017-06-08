@@ -1,6 +1,6 @@
 from future.utils import python_2_unicode_compatible
 from abc import abstractmethod
-from message import Message
+from viberbot.api.messages.message import Message
 
 
 class TypedMessage(Message):
