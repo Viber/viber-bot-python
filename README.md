@@ -6,7 +6,7 @@ The library is available on [GitHub](https://github.com/Viber/viber-bot-python) 
 This package can be imported using pip by adding the following to your `requirements.txt`:
 
 ```python
-viberbot==1.0.10
+viberbot==1.0.11
 ```
 
 ## License
