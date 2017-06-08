@@ -6,7 +6,7 @@ The library is available on [GitHub](https://github.com/Viber/viber-bot-python) 
 This package can be imported using pip by adding the following to your `requirements.txt`:
 
 ```python
-viber==0.1.3.1
+viberbot==1.0.10
 ```
 
 ## License
@@ -126,6 +126,7 @@ Have you noticed how we created the `TextMessage`? There's a all bunch of messag
 * [Location Message](#LocationMessage)
 * [Sticker Message](#StickerMessage)
 * [Rich Media Message](#RichMediaMessage)
+* [Keyboard Message](#KeyboardMessage)
 
 Creating them is easy! Every message object has it's own unique constructor corresponding to it's API implementation, click on them to see it!
 Check out the full API documentation for more advanced uses.
@@ -619,6 +620,19 @@ SAMPLE_RICH_MEDIA = """{
 SAMPLE_ALT_TEXT = "upgrade now!"
 
 message = RichMediaMessage(rich_media=SAMPLE_RICH_MEDIA, alt_text=SAMPLE_ALT_TEXT);
+```
+
+<a name="KeyboardMessage"></a>
+
+#### KeyboardMessage object
+
+| Member | Type
+| --- | --- |
+| keyboard | `JSON` |
+| tracking_data | `JSON` |
+
+```python
+message = KeyboardMessage(tracking_data=tracking_data, keyboard=keyboard)
 ```
 
 <a name="SendingWelcomeMessage"></a>
