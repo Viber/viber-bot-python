@@ -1,9 +1,9 @@
 from future.utils import python_2_unicode_compatible
-from viberbot.api.messages.message import Message
+from viberbot.api.messages.typed_message import TypedMessage
 from viberbot.api.messages.message_type import MessageType
 
 
-class TextMessage(Message):
+class TextMessage(TypedMessage):
 	def __init__(self, tracking_data=None, keyboard=None, text=None, min_api_version=None):
 		super(TextMessage, self).__init__(MessageType.TEXT, tracking_data, keyboard, min_api_version)
 		self._text = text
@@ -20,7 +20,8 @@ class TextMessage(Message):
 		return self
 
 	def validate(self):
-		return self._text is not None
+		return super(TextMessage, self).validate() \
+				and self._text is not None
 
 	@property
 	def text(self):

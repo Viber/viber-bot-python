@@ -1,9 +1,9 @@
 from future.utils import python_2_unicode_compatible
-from viberbot.api.messages.message import Message
+from viberbot.api.messages.typed_message import TypedMessage
 from viberbot.api.messages.message_type import MessageType
 
 
-class FileMessage(Message):
+class FileMessage(TypedMessage):
 	def __init__(self, tracking_data=None, keyboard=None, media=None, size=None, file_name=None, min_api_version=None):
 		super(FileMessage, self).__init__(MessageType.FILE, tracking_data, keyboard, min_api_version)
 		self._media = media
@@ -40,14 +40,16 @@ class FileMessage(Message):
 		return self._file_name
 
 	def validate(self):
-		return self._media is not None \
-			  and self._size is not None \
-			  and self._file_name is not None
+		return super(FileMessage, self).validate() \
+				and self._media is not None \
+				and self._size is not None \
+				and self._file_name is not None
 
 	@python_2_unicode_compatible
 	def __str__(self):
 		return u"FileMessage [{0}, media={1}, size={2}, file_name={3}]". \
-			format(super(FileMessage, self).__str__(),
-				   self._media,
-				   self._size,
-				   self._file_name)
+			format(
+				super(FileMessage, self).__str__(),
+				self._media,
+				self._size,
+				self._file_name)

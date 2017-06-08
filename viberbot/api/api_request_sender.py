@@ -12,10 +12,11 @@ class ApiRequestSender(object):
 		self._bot_configuration = bot_configuration
 		self._user_agent = viber_bot_user_agent
 
-	def set_webhook(self, url, webhook_events=None):
+	def set_webhook(self, url, webhook_events=None, is_inline=False):
 		payload = {
 			'auth_token': self._bot_configuration.auth_token,
 			'url': url,
+			'is_inline': is_inline
 		}
 
 		if webhook_events is not None:
@@ -50,17 +51,19 @@ class ApiRequestSender(object):
 			response.raise_for_status()
 			return json.loads(response.text)
 		except RequestException as e:
-			self._logger.error(u"failed to post request to endpoint={0}, with payload={1}. error is: {2}"
-							   .format(endpoint, payload, traceback.format_exc()))
+			self._logger.error(
+				u"failed to post request to endpoint={0}, with payload={1}. error is: {2}"
+				.format(endpoint, payload, traceback.format_exc()))
 			raise e
 		except Exception as ex:
-			self._logger.error(u"unexpected Exception while trying to post request. error is: {0}"
-							   .format(traceback.format_exc()))
+			self._logger.error(
+				u"unexpected Exception while trying to post request. error is: {0}"
+				.format(traceback.format_exc()))
 			raise ex
 
 	def get_online_status(self, ids=[]):
 		if ids is None or not isinstance(ids, list) or len(ids) == 0:
-			raise Exception("missing parameter ids, should be a list of viber memberIds")
+			raise Exception(u"missing parameter ids, should be a list of viber memberIds")
 
 		payload = {
 			'auth_token': self._bot_configuration.auth_token,
@@ -77,7 +80,7 @@ class ApiRequestSender(object):
 
 	def get_user_details(self, user_id):
 		if user_id is None:
-			raise Exception("missing parameter id")
+			raise Exception(u"missing parameter id")
 
 		payload = {
 			'auth_token': self._bot_configuration.auth_token,
@@ -91,4 +94,5 @@ class ApiRequestSender(object):
 			raise Exception(u"failed with status: {0}, message: {1}".format(result['status'], result['status_message']))
 
 		return result['user']
+
 

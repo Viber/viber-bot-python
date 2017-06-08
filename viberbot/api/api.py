@@ -24,9 +24,9 @@ class Api(object):
 	def avatar(self):
 		return self._bot_configuration.avatar
 
-	def set_webhook(self, url, webhook_events=None):
+	def set_webhook(self, url, webhook_events=None, is_inline=False):
 		self._logger.debug(u"setting webhook to url: {0}".format(url))
-		return self._request_sender.set_webhook(url, webhook_events)
+		return self._request_sender.set_webhook(url, webhook_events, is_inline)
 
 	def unset_webhook(self):
 		self._logger.debug("unsetting webhook")
@@ -54,10 +54,11 @@ class Api(object):
 		self._logger.debug(u"parsed request={0}".format(request))
 		return request
 
-	def send_messages(self, to, messages):
+	def send_messages(self, to, messages, chat_id=None):
 		"""
 		:param to: Viber user id
 		:param messages: list of Message objects to be sent
+		:param chat_id: Optional. String. Indicates that this is a message sent in inline conversation.
 		:return: list of tokens of the sent messages
 		"""
 		self._logger.debug("going to send messages: {0}, to: {1}".format(messages, to))
@@ -67,14 +68,28 @@ class Api(object):
 		sent_messages_tokens = []
 
 		for message in messages:
-			token = self._message_sender.send_message(to, self._bot_configuration.name, self._bot_configuration.avatar, message)
+			token = self._message_sender.send_message(
+				to, self._bot_configuration.name, self._bot_configuration.avatar, message, chat_id)
+			sent_messages_tokens.append(token)
+
+		return sent_messages_tokens
+
+	def post_messages_to_public_account(self, sender, messages):
+		if not isinstance(messages, list):
+			messages = [messages]
+
+		sent_messages_tokens = []
+
+		for message in messages:
+			token = self._message_sender.post_to_public_account(
+				sender, self._bot_configuration.name, self._bot_configuration.avatar, message)
 			sent_messages_tokens.append(token)
 
 		return sent_messages_tokens
 
 	def _calculate_message_signature(self, message):
-		return hmac.new(bytes(self._bot_configuration.auth_token.encode('ascii')),
-						msg=message,
-						digestmod=hashlib.sha256)\
+		return hmac.new(
+			bytes(self._bot_configuration.auth_token.encode('ascii')),
+			msg=message,
+			digestmod=hashlib.sha256)\
 			.hexdigest()
-

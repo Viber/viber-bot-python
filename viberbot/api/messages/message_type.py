@@ -8,3 +8,4 @@ class MessageType(object):
 	TEXT = 'text'
 	PICTURE = 'picture'
 	VIDEO = 'video'
+	KEYBOARD = 'keyboard'

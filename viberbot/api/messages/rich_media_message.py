@@ -1,9 +1,9 @@
 from future.utils import python_2_unicode_compatible
-from viberbot.api.messages.message import Message
+from viberbot.api.messages.typed_message import TypedMessage
 from viberbot.api.messages.message_type import MessageType
 
 
-class RichMediaMessage(Message):
+class RichMediaMessage(TypedMessage):
 	def __init__(self, tracking_data=None, keyboard=None, rich_media=None, min_api_version=None, alt_text=None):
 		super(RichMediaMessage, self).__init__(MessageType.RICH_MEDIA, tracking_data, keyboard, min_api_version)
 		self._rich_media = rich_media
@@ -24,7 +24,8 @@ class RichMediaMessage(Message):
 		return self
 
 	def validate(self):
-		return self._rich_media is not None
+		return super(RichMediaMessage, self).validate() \
+				and self._rich_media is not None
 
 	@property
 	def rich_media(self):
@@ -36,5 +37,8 @@ class RichMediaMessage(Message):
 
 	@python_2_unicode_compatible
 	def __str__(self):
-		return u"RichMediaMessage [{0}, rich_media={1}]".format(super(RichMediaMessage, self).__str__(),
-																self._rich_media, self._alt_text)
+		return u"RichMediaMessage [{0}, rich_media={1}]"\
+			.format(
+				super(RichMediaMessage, self).__str__(),
+				self._rich_media,
+				self._alt_text)

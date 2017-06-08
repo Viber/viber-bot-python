@@ -10,5 +10,4 @@ class BOT_API_ENDPOINT(object):
 	SEND_MESSAGE = 'send_message'
 	GET_ONLINE = 'get_online'
 	GET_USER_DETAILS = 'get_user_details'
-
-
+	POST = 'post'

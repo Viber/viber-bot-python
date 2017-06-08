@@ -1,9 +1,9 @@
 from future.utils import python_2_unicode_compatible
-from viberbot.api.messages.message import Message
+from viberbot.api.messages.typed_message import TypedMessage
 from viberbot.api.messages.message_type import MessageType
 
 
-class VideoMessage(Message):
+class VideoMessage(TypedMessage):
 	def __init__(self, tracking_data=None, keyboard=None, media=None, thumbnail=None, size=None, text=None, duration=None, min_api_version=None):
 		super(VideoMessage, self).__init__(MessageType.VIDEO, tracking_data, keyboard, min_api_version)
 		self._media = media
@@ -36,7 +36,9 @@ class VideoMessage(Message):
 		return self
 
 	def validate(self):
-		return self._media is not None and self._size is not None
+		return super(VideoMessage, self).validate() \
+				and self._media is not None \
+				and self._size is not None
 
 	@property
 	def media(self):
@@ -61,9 +63,10 @@ class VideoMessage(Message):
 	@python_2_unicode_compatible
 	def __str__(self):
 		return u"VideoMessage [{0}, media={1}, thumbnail={2}, size={3}, duration={4} text={5}]".\
-			format(super(VideoMessage, self).__str__(),
-				   self._media,
-				   self._thumbnail,
-				   self._size,
-				   self._duration,
-				   self._text)
+			format(
+				super(VideoMessage, self).__str__(),
+				self._media,
+				self._thumbnail,
+				self._size,
+				self._duration,
+				self._text)

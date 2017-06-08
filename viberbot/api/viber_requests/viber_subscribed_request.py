@@ -28,6 +28,4 @@ class ViberSubscribedRequest(ViberRequest):
 	@python_2_unicode_compatible
 	def __str__(self):
 		return u"ViberSubscribedRequest [{0}, user={1}]" \
-			.format(super(ViberSubscribedRequest, self).__str__(),
-					self._user)
-
+			.format(super(ViberSubscribedRequest, self).__str__(), self._user)

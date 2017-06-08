@@ -54,10 +54,10 @@ class ViberConversationStartedRequest(ViberRequest):
 	@python_2_unicode_compatible
 	def __str__(self):
 		return u"ViberConversationStartedRequest [{0}, message_token={1}, type={2}, context{3}, user={4} subscribed={5}]"\
-			.format(super(ViberConversationStartedRequest, self).__str__(),
-					self._message_token,
-					self._type,
-					self._context,
-					self._user,
-					self._subscribed)
-
+			.format(
+				super(ViberConversationStartedRequest, self).__str__(),
+				self._message_token,
+				self._type,
+				self._context,
+				self._user,
+				self._subscribed)

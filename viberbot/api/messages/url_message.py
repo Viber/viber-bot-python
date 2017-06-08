@@ -1,9 +1,9 @@
 from future.utils import python_2_unicode_compatible
-from viberbot.api.messages.message import Message
+from viberbot.api.messages.typed_message import TypedMessage
 from viberbot.api.messages.message_type import MessageType
 
 
-class URLMessage(Message):
+class URLMessage(TypedMessage):
 	def __init__(self, tracking_data=None, keyboard=None, media=None, min_api_version=None):
 		super(URLMessage, self).__init__(MessageType.URL, tracking_data, keyboard, min_api_version)
 		self._media = media
@@ -24,7 +24,8 @@ class URLMessage(Message):
 		return self._media
 
 	def validate(self):
-		return self._media is not None
+		return super(URLMessage, self).validate() \
+				and self._media is not None
 
 	@python_2_unicode_compatible
 	def __str__(self):

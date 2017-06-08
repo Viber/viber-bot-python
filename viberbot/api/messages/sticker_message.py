@@ -1,9 +1,9 @@
 from future.utils import python_2_unicode_compatible
-from viberbot.api.messages.message import Message
+from viberbot.api.messages.typed_message import TypedMessage
 from viberbot.api.messages.message_type import MessageType
 
 
-class StickerMessage(Message):
+class StickerMessage(TypedMessage):
 	def __init__(self, tracking_data=None, keyboard=None, sticker_id=None, min_api_version=None):
 		super(StickerMessage, self).__init__(MessageType.STICKER, tracking_data, keyboard, min_api_version)
 		self._sticker_id = sticker_id
@@ -24,7 +24,8 @@ class StickerMessage(Message):
 		return self._sticker_id
 
 	def validate(self):
-		return self._sticker_id is not None
+		return super(StickerMessage, self).validate() \
+				and self._sticker_id is not None
 
 	@python_2_unicode_compatible
 	def __str__(self):

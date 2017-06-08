@@ -1,10 +1,10 @@
 from future.utils import python_2_unicode_compatible
 from viberbot.api.messages.data_types.location import Location
-from viberbot.api.messages.message import Message
+from viberbot.api.messages.typed_message import TypedMessage
 from viberbot.api.messages.message_type import MessageType
 
 
-class LocationMessage(Message):
+class LocationMessage(TypedMessage):
 	def __init__(self, tracking_data=None, keyboard=None, location=None, min_api_version=None):
 		super(LocationMessage, self).__init__(MessageType.LOCATION, tracking_data, keyboard, min_api_version)
 		self._location = location
@@ -26,10 +26,12 @@ class LocationMessage(Message):
 		return self._location
 
 	def validate(self):
-		return self._location and self._location.validate()
+		return super(LocationMessage, self).validate() \
+				and self._location and self._location.validate()
 
 	@python_2_unicode_compatible
 	def __str__(self):
-		return u"LocationMessage [{0}, contact={1}]". \
-			format(super(LocationMessage, self).__str__(),
-				   self._location)
+		return u"LocationMessage [{0}, contact={1}]"\
+			.format(
+				super(LocationMessage, self).__str__(),
+				self._location)

@@ -8,7 +8,6 @@ from viberbot.api.viber_requests.viber_seen_request import ViberSeenRequest
 from viberbot.api.viber_requests.viber_subscribed_request import ViberSubscribedRequest
 from viberbot.api.viber_requests.viber_unsubscribed_request import ViberUnsubscribedRequest
 
-
 EVENT_TYPE_TO_CLASS = {
 	EventType.MESSAGE: ViberMessageRequest,
 	EventType.FAILED: ViberFailedRequest,
@@ -31,7 +30,6 @@ def create_request(request_dict):
 	return EVENT_TYPE_TO_CLASS[request_dict['event']]().from_dict(request_dict)
 
 
-__all__ = ['ViberConversationStartedRequest', 'ViberDeliveredRequest', 'ViberFailedRequest', 'ViberMessageRequest',
-		   'ViberSeenRequest', 'ViberSubscribedRequest', 'ViberUnsubscribedRequest']
-
-
+__all__ = [
+	'ViberConversationStartedRequest', 'ViberDeliveredRequest', 'ViberFailedRequest', 'ViberMessageRequest',
+	'ViberSeenRequest', 'ViberSubscribedRequest', 'ViberUnsubscribedRequest']

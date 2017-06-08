@@ -20,5 +20,4 @@ class ViberUnsubscribedRequest(ViberRequest):
 	@python_2_unicode_compatible
 	def __str__(self):
 		return u"ViberUnsubscribedRequest [{0}, user_id={1}]" \
-			.format(super(ViberUnsubscribedRequest, self).__str__(),
-					self._user_id)
+			.format(super(ViberUnsubscribedRequest, self).__str__(), self._user_id)

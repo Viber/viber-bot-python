@@ -26,7 +26,4 @@ class ViberSeenRequest(ViberRequest):
 	@python_2_unicode_compatible
 	def __str__(self):
 		return u"ViberSeenRequest [{0}, message_token={1}, user_id={2}]" \
-			.format(super(ViberSeenRequest, self).__str__(),
-					self._message_token,
-					self._user_id)
-
+			.format(super(ViberSeenRequest, self).__str__(), self._message_token, self._user_id)

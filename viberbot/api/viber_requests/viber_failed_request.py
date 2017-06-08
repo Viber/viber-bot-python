@@ -32,9 +32,8 @@ class ViberFailedRequest(ViberRequest):
 	@python_2_unicode_compatible
 	def __str__(self):
 		return u"ViberFailedRequest [{0}, message_token={1}, user_id={2}, desc={3}]" \
-			.format(super(ViberFailedRequest, self).__str__(),
-					self._message_token,
-					self._user_id,
-					self._desc)
-
-
+			.format(
+				super(ViberFailedRequest, self).__str__(),
+				self._message_token,
+				self._user_id,
+				self._desc)

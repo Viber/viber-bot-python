@@ -1,9 +1,9 @@
 from future.utils import python_2_unicode_compatible
-from viberbot.api.messages.message import Message
+from viberbot.api.messages.typed_message import TypedMessage
 from viberbot.api.messages.message_type import MessageType
 
 
-class PictureMessage(Message):
+class PictureMessage(TypedMessage):
 	def __init__(self, tracking_data=None, keyboard=None, text=None, media=None, thumbnail=None, min_api_version=None):
 		super(PictureMessage, self).__init__(MessageType.PICTURE, tracking_data, keyboard, min_api_version)
 		self._text = text or ''
@@ -28,7 +28,8 @@ class PictureMessage(Message):
 		return self
 
 	def validate(self):
-		return self._text is not None and self._media is not None
+		return super(PictureMessage, self).validate() \
+				and self._text is not None and self._media is not None
 
 	@property
 	def text(self):
@@ -44,7 +45,9 @@ class PictureMessage(Message):
 
 	@python_2_unicode_compatible
 	def __str__(self):
-		return u"PictureMessage [{0}, text={1}, media={2}, thumbnail={3}]".format(super(PictureMessage, self).__str__(),
-																				 self._text,
-																				 self._media,
-																				 self._thumbnail)
+		return u"PictureMessage [{0}, text={1}, media={2}, thumbnail={3}]"\
+			.format(
+				super(PictureMessage, self).__str__(),
+				self._text,
+				self._media,
+				self._thumbnail)
