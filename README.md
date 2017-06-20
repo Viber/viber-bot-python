@@ -195,14 +195,15 @@ As you can see there's a bunch of `Request` types here's a list of them.
 
 * Api
     * [init(bot\_configuration)](#new-Api())
-    * [.set\_webhook(url, webhook_events)](#set_webhook) ⇒ `List of registered event_types`
+    * [.set\_webhook(url, webhook\_events)](#set_webhook) ⇒ `List of registered event_types`
     * [.unset\_webhook()](#unset_webhook) ⇒ `None`
-    * [.get\_account_info()](#get_account_info) ⇒ `object`
+    * [.get\_account\_info()](#get_account_info) ⇒ `object`
     * [.verify\_signature(request\_data, signature)](#verify_signature) ⇒ `boolean`
     * [.parse\_request(request\_data)](#parse_request) ⇒ `ViberRequest`
     * [.send\_messages(to, messages)](#send_messages) ⇒ `list of message tokens sent`
     * [.get\_online(viber\_user\_ids)](#get_online) ⇒ `dictionary of users status`
-    * [.get\_user_details(viber\_user\_id)](#get_user_details) ⇒ `dictionary of user's data`
+    * [.get\_user\_details(viber\_user\_id)](#get_user_details) ⇒ `dictionary of user's data`
+    * [.post\_messages\_to\_public\_account(to, messages)](#post_to_pa) ⇒ `list of message tokens sent`
 
 <a name="new-Api()"></a>
 
@@ -221,7 +222,7 @@ As you can see there's a bunch of `Request` types here's a list of them.
 | url | `string` | Your web server url |
 | webhook\_events | `list` | optional list of subscribed events |
 
-Returns `List of registered event_types`. **Example**
+Returns `List of registered event_types`.
 
 ```python
 event_types = viber.set_webhook('https://example.com/incoming')
@@ -231,7 +232,7 @@ event_types = viber.set_webhook('https://example.com/incoming')
 
 ### Api.unset\_webhook()
 
-Returns `None`. **Example**
+Returns `None`.
 
 ```python
 viber.unset_webhook()
@@ -241,7 +242,7 @@ viber.unset_webhook()
 
 ### Api.get\_account\_info()
 
-Returns an `object` [with the following JSON](https://developers.viber.com/docs/api/rest-bot-api/#get-account-info). **Example**
+Returns an `object` [with the following JSON](https://developers.viber.com/docs/api/rest-bot-api/#get-account-info).
 
 ```python
 account_info = viber.get_account_info()
@@ -256,8 +257,7 @@ account_info = viber.get_account_info()
 | request\_data | `string` | the post data from request |
 | signature | `string` | sent as header `X-Viber-Content-Signature` |
 
-
-Returns a `boolean` suggesting if the signature is valid. **Example**
+Returns a `boolean` suggesting if the signature is valid.
 
 ```python
 if not viber.verify_signature(request.get_data(), request.headers.get('X-Viber-Content-Signature')):
@@ -272,7 +272,7 @@ if not viber.verify_signature(request.get_data(), request.headers.get('X-Viber-C
 | --- | --- | --- |
 | request\_data | `string` | the post data from request |
 
-Returns a `ViberRequest` object. **Example**
+Returns a `ViberRequest` object.
 
 There's a list of [ViberRequest objects](#ViberRequest)
 
@@ -286,13 +286,29 @@ viber_request = viber.parse_request(request.get_data())
 
 | Param | Type | Description |
 | --- | --- | --- |
-| to | `string` | receiver viberId |
+| to | `string` | Viber user id |
 | messages | `list` | list of `Message` objects |
 
-Returns `list` of message tokens of the messages sent. **Example**
+Returns `list` of message tokens of the messages sent.
 
 ```python
 tokens = viber.send_messages(to=viber_request.get_sender().get_id(),
+			     messages=[TextMessage(text="sample message")])
+```
+
+<a name="post_to_pa"></a>
+
+### Api.post\_messages\_to\_public\_account(to, messages)
+
+| Param | Type | Description |
+| --- | --- | --- |
+| sender | `string` | Viber user id |
+| messages | `list` | list of `Message` objects |
+
+Returns `list` of message tokens of the messages sent.
+
+```python
+tokens = viber.post_messages_to_public_account(sender=viber_request.get_sender().get_id(),
 			     messages=[TextMessage(text="sample message")])
 ```
 
@@ -474,7 +490,7 @@ Inherits from [ViberRequest](#ViberRequest)
 
 | Param | Type | Description |
 | --- | --- | --- |
-| optionalKeyboard | `JSON` | [Writing Custom Keyboards](https://developers.viber.com/docs/tools/keyboards) |
+| optionalKeyboard | `JSON` | [Writing Custom Keyboards](https://developers.viber.com/docs/tools/keyboards/) |
 | optionalTrackingData | `JSON` | Data to be saved on Viber Client device, and sent back each time message is received |
 
 <a name="TextMessage"></a>
