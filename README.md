@@ -1,7 +1,7 @@
 # Viber Python Bot API
 
 Use this library to develop a bot for Viber platform.
-The library is available on [GitHub](https://github.com/Viber/viber-bot-python) as well as a package on [PyPI](https://pypi.python.org/pypi/viberbot/).
+The library is available on **[GitHub](https://github.com/Viber/viber-bot-python)** as well as a package on [PyPI](https://pypi.python.org/pypi/viberbot/).
 
 This package can be imported using pip by adding the following to your `requirements.txt`:
 
@@ -15,9 +15,11 @@ This library is released under the terms of the Apache 2.0 license. See [License
 
 ## Library Prerequisites
 
-* python >= 2.7.0
-* Get your Viber Public Account authentication token. Your token is generated and provided to you during the Public Account creation process. As a Public Account admin, you can always find the account token in the "edit info" page.
-* Certification - You'll need a trusted (ca.pem) certificate, not self-signed. You can find one at [Let's Encrypt](https://letsencrypt.org/) or buy one.
+1. python >= 2.7.0
+1. An Active Viber account on a platform which supports Public Accounts/ bots (iOS/Android). This account will automatically be set as the account administrator during the account creation process.
+1. Active Public Account/ bot.
+1. Account authentication token - unique account identifier used to validate your account in all API requests. Once your account is created your authentication token will appear in the account’s “edit info” screen (for admins only). Each request posted to Viber by the account will need to contain the token.
+1. Certification - You'll need a trusted (ca.pem) certificate, not self-signed. You can find one at [Let's Encrypt](https://letsencrypt.org/) or buy one.
 
 ## Let's get started!
 
@@ -25,9 +27,9 @@ This library is released under the terms of the Apache 2.0 license. See [License
 
 Creating a basic Viber bot is simple:
 
-1. Install the library though pip `pip install viberbot`
+1. Install the library with pip `pip install viberbot`
 2. Import `viberbot.api` library to your project
-3. Create a Public Account and use the API key from [https://developers.viber.com]()
+3. Create a Public Account or bot and use the API key from [https://developers.viber.com]()
 4. Configure your bot as described in the documentation below
 5. Start your web server
 6. Call `set_webhook(url)` with your web server url
@@ -195,14 +197,14 @@ As you can see there's a bunch of `Request` types here's a list of them.
 
 * Api
     * [init(bot\_configuration)](#new-Api())
-    * [.set\_webhook(url, webhook\_events)](#set_webhook) ⇒ `List of registered event_types`
+    * [.set\_webhook(url, webhook_events)](#set_webhook) ⇒ `List of registered event_types`
     * [.unset\_webhook()](#unset_webhook) ⇒ `None`
-    * [.get\_account\_info()](#get_account_info) ⇒ `object`
+    * [.get\_account_info()](#get_account_info) ⇒ `object`
     * [.verify\_signature(request\_data, signature)](#verify_signature) ⇒ `boolean`
     * [.parse\_request(request\_data)](#parse_request) ⇒ `ViberRequest`
     * [.send\_messages(to, messages)](#send_messages) ⇒ `list of message tokens sent`
     * [.get\_online(viber\_user\_ids)](#get_online) ⇒ `dictionary of users status`
-    * [.get\_user\_details(viber\_user\_id)](#get_user_details) ⇒ `dictionary of user's data`
+    * [.get\_user_details(viber\_user\_id)](#get_user_details) ⇒ `dictionary of user's data`
     * [.post\_messages\_to\_public\_account(to, messages)](#post_to_pa) ⇒ `list of message tokens sent`
 
 <a name="new-Api()"></a>
@@ -222,7 +224,7 @@ As you can see there's a bunch of `Request` types here's a list of them.
 | url | `string` | Your web server url |
 | webhook\_events | `list` | optional list of subscribed events |
 
-Returns `List of registered event_types`.
+Returns `List of registered event_types`. 
 
 ```python
 event_types = viber.set_webhook('https://example.com/incoming')
@@ -232,7 +234,7 @@ event_types = viber.set_webhook('https://example.com/incoming')
 
 ### Api.unset\_webhook()
 
-Returns `None`.
+Returns `None`. 
 
 ```python
 viber.unset_webhook()
@@ -242,7 +244,7 @@ viber.unset_webhook()
 
 ### Api.get\_account\_info()
 
-Returns an `object` [with the following JSON](https://developers.viber.com/docs/api/rest-bot-api/#get-account-info).
+Returns an `object` [with the following JSON](https://developers.viber.com/docs/api/rest-bot-api/#get-account-info). 
 
 ```python
 account_info = viber.get_account_info()
@@ -257,7 +259,8 @@ account_info = viber.get_account_info()
 | request\_data | `string` | the post data from request |
 | signature | `string` | sent as header `X-Viber-Content-Signature` |
 
-Returns a `boolean` suggesting if the signature is valid.
+
+Returns a `boolean` suggesting if the signature is valid. 
 
 ```python
 if not viber.verify_signature(request.get_data(), request.headers.get('X-Viber-Content-Signature')):
@@ -272,7 +275,7 @@ if not viber.verify_signature(request.get_data(), request.headers.get('X-Viber-C
 | --- | --- | --- |
 | request\_data | `string` | the post data from request |
 
-Returns a `ViberRequest` object.
+Returns a `ViberRequest` object. 
 
 There's a list of [ViberRequest objects](#ViberRequest)
 
@@ -289,7 +292,7 @@ viber_request = viber.parse_request(request.get_data())
 | to | `string` | Viber user id |
 | messages | `list` | list of `Message` objects |
 
-Returns `list` of message tokens of the messages sent.
+Returns `list` of message tokens of the messages sent. 
 
 ```python
 tokens = viber.send_messages(to=viber_request.get_sender().get_id(),
@@ -305,7 +308,7 @@ tokens = viber.send_messages(to=viber_request.get_sender().get_id(),
 | sender | `string` | Viber user id |
 | messages | `list` | list of `Message` objects |
 
-Returns `list` of message tokens of the messages sent.
+Returns `list` of message tokens of the messages sent. 
 
 ```python
 tokens = viber.post_messages_to_public_account(sender=viber_request.get_sender().get_id(),
@@ -334,7 +337,7 @@ users = Api.get_online(["user1id", "user2id"])
 | --- | --- | --- |
 | viber\_user\_ids | `string` | Viber user id |
 
-The `get_user_details` function will fetch the details of a specific Viber user based on his unique user ID. The user ID can be obtained from the callbacks sent to the PA regrading user's actions. This request can be sent twice during a 12 hours period for each user ID.
+The `get_user_details` function will fetch the details of a specific Viber user based on his unique user ID. The user ID can be obtained from the callbacks sent to the account regarding user's actions. This request can be sent twice during a 12 hours period for each user ID.
 
 ```python
 user_data = Api.get_user_details("userId")
@@ -359,9 +362,9 @@ user_data = Api.get_user_details("userId")
 
 Inherits from [ViberRequest](#ViberRequest)
 
-Conversation started event fires when a user opens a conversation with the PA using the “message” button (found on the PA’s info screen) or using a [deep link](https://developers.viber.com/docs/tools/deep-links/).
+Conversation started event fires when a user opens a conversation with the Public Account/ bot using the “message” button (found on the account’s info screen) or using a [deep link](https://developers.viber.com/docs/tools/deep-links).
 
-This event is **not** considered a subscribe event and doesn't allow the PA to send messages to the user; however, it will allow sending one "welcome message" to the user. See [sending a welcome message](#SendingWelcomeMessage) below for more information. 
+This event is **not** considered a subscribe event and doesn't allow the account to send messages to the user; however, it will allow sending one "welcome message" to the user. See [sending a welcome message](#SendingWelcomeMessage) below for more information. 
 
 | Param | Type | Notes |
 | --- | --- | --- |
@@ -490,7 +493,7 @@ Inherits from [ViberRequest](#ViberRequest)
 
 | Param | Type | Description |
 | --- | --- | --- |
-| optionalKeyboard | `JSON` | [Writing Custom Keyboards](https://developers.viber.com/docs/tools/keyboards/) |
+| optionalKeyboard | `JSON` | [Writing Custom Keyboards](https://developers.viber.com/docs/tools/keyboards) |
 | optionalTrackingData | `JSON` | Data to be saved on Viber Client device, and sent back each time message is received |
 
 <a name="TextMessage"></a>
@@ -633,6 +636,7 @@ SAMPLE_RICH_MEDIA = """{
     }
   ]
 }"""
+
 SAMPLE_ALT_TEXT = "upgrade now!"
 
 message = RichMediaMessage(rich_media=SAMPLE_RICH_MEDIA, alt_text=SAMPLE_ALT_TEXT);
@@ -655,17 +659,17 @@ message = KeyboardMessage(tracking_data=tracking_data, keyboard=keyboard)
 
 ### Sending a welcome message
 
-The Public Accounts API allows sending messages to users only after they subscribe to the PA. However, Viber will allow the PA to send one "welcome message" to a user as the user opens the conversation, before the user subscribes.
+The Viber API allows sending messages to users only after they subscribe to the account. However, Viber will allow the account to send one “welcome message” to a user as the user opens the conversation, before the user subscribes.
 
-The welcome message will be sent as a response to a conversation_started callback, which will be received from Viber once the user opens the conversation with the Public Account. To learn more about this event and when is it triggered see [`Conversation started`](#ConversationStarted) in the Callbacks section.
+The welcome message will be sent as a response to a `conversation_started` callback, which will be received from Viber once the user opens the conversation with the account. To learn more about this event and when is it triggered see [`Conversation started`](#ConversationStarted) in the callbacks section.
 
 #### Welcome message flow
 
 Sending a welcome message will be done according to the following flow:
 
-1. User opens 1-on-1 conversation with PA.
-2. Viber server send “conversation_started” even to PA’s webhook.
-3. PA receives the “conversation_started” and responds with an HTTP response which includes the welcome message as the response body.
+1. User opens 1-on-1 conversation with account.
+2. Viber server send `conversation_started` even to PA’s webhook.
+3. The account receives the `conversation_started` and responds with an HTTP response which includes the welcome message as the response body.
 
 The welcome message will be a JSON constructed according to the send_message requests structure, but without the `receiver` parameter. An example welcome message would look like this:
 
