@@ -49,7 +49,8 @@ class Api(object):
 
 	def parse_request(self, request_data):
 		self._logger.debug("parsing request")
-		request_dict = json.loads(request_data)
+		request_dict = json.loads(request_data.decode() if isinstance(
+			request_data, bytes) else request_data)
 		request = create_request(request_dict)
 		self._logger.debug(u"parsed request={0}".format(request))
 		return request
