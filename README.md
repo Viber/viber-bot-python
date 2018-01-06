@@ -29,7 +29,7 @@ Creating a basic Viber bot is simple:
 
 1. Install the library with pip `pip install viberbot`
 2. Import `viberbot.api` library to your project
-3. Create a Public Account or bot and use the API key from [https://developers.viber.com]()
+3. Create a Public Account or bot and use the API key from [https://developers.viber.com](https://developers.viber.com)
 4. Configure your bot as described in the documentation below
 5. Start your web server
 6. Call `set_webhook(url)` with your web server url
