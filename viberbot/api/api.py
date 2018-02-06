@@ -49,6 +49,7 @@ class Api(object):
 
 	def parse_request(self, request_data):
 		self._logger.debug("parsing request")
+		request_data = request_data.decode('unicode_escape').encode('utf_16_be', 'surrogatepass')
 		request_dict = json.loads(request_data)
 		request = create_request(request_dict)
 		self._logger.debug(u"parsed request={0}".format(request))
