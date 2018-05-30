@@ -18,7 +18,7 @@ class ViberDeliveredRequest(ViberRequest):
 		return self
 
 	@property
-	def meesage_token(self):
+	def message_token(self):
 		return self._message_token
 
 	@property
