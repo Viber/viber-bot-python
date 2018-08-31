@@ -517,7 +517,7 @@ message = TextMessage(text="my text message")
 | media | `string` | URL string |
 
 ```python
-message = URLMessage(media="http://my.siteurl.com");
+message = URLMessage(media="http://my.siteurl.com")
 ```
 
 <a name="ContactMessage"></a>
@@ -588,7 +588,7 @@ location_message = LocationMessage(location=location)
 | sticker\_id | `int` |
 
 ```python
-message = StickerMessage(sticker_id=40100);
+message = StickerMessage(sticker_id=40100)
 ```
 
 <a name="FileMessage"></a>
@@ -639,7 +639,7 @@ SAMPLE_RICH_MEDIA = """{
 
 SAMPLE_ALT_TEXT = "upgrade now!"
 
-message = RichMediaMessage(rich_media=SAMPLE_RICH_MEDIA, alt_text=SAMPLE_ALT_TEXT);
+message = RichMediaMessage(rich_media=SAMPLE_RICH_MEDIA, alt_text=SAMPLE_ALT_TEXT)
 ```
 
 <a name="KeyboardMessage"></a>
