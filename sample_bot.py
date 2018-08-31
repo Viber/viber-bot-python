@@ -43,7 +43,7 @@ def incoming():
 			or isinstance(viber_request, ViberUnsubscribedRequest):
 		viber.send_messages(viber_request.sender.id, [
 			TextMessage(None, None, viber_request.get_event_type())
-		]
+		])
 	elif isinstance(viber_request, ViberFailedRequest):
 		logger.warn("client failed receiving message. failure: {0}".format(viber_request))
 
