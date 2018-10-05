@@ -31,7 +31,7 @@ viber = Api(BotConfiguration(
 def incoming():
 	logger.debug("received request. post data: {0}".format(request.get_data()))
 
-	viber_request = viber.parse_request(request.get_data())
+	viber_request = viber.parse_request(request.get_data().decode('utf8'))
 
 	if isinstance(viber_request, ViberMessageRequest):
 		message = viber_request.message
@@ -43,7 +43,7 @@ def incoming():
 			or isinstance(viber_request, ViberUnsubscribedRequest):
 		viber.send_messages(viber_request.sender.id, [
 			TextMessage(None, None, viber_request.get_event_type())
-		]
+		])
 	elif isinstance(viber_request, ViberFailedRequest):
 		logger.warn("client failed receiving message. failure: {0}".format(viber_request))
 
