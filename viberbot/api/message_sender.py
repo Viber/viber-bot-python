@@ -64,7 +64,8 @@ class MessageSender(object):
 				'name': sender_name,
 				'avatar': sender_avatar
 			},
-			"chat_id": chat_id
+			"chat_id": chat_id,
+			"min_api_version": self._bot_configuration.min_api_version
 		})
 
 		return self._remove_empty_fields(payload)
