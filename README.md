@@ -21,7 +21,26 @@ This library is released under the terms of the Apache 2.0 license. See [License
 1. Account authentication token - unique account identifier used to validate your account in all API requests. Once your account is created your authentication token will appear in the account’s “edit info” screen (for admins only). Each request posted to Viber by the account will need to contain the token.
 1. Webhook - Please use a server endpoint URL that supports HTTPS. If you deploy on your own custom server, you'll need a trusted (ca.pem) certificate, not self-signed. Read our [blog post](https://developers.viber.com/blog/2017/05/24/test-your-bots-locally) on how to test your bot locally.
 
+
+## Contributing
+
+If you think that there's a bug or there's anything else needed to be changed and you want to change it yourself, you can always create a new Pull request.  
+Please make sure that your change doesn't break anything and all the unit tests passes.  
+Also, please make sure that the current tests cover your change, if not please add tests.  
+  
+We are using pytest, so if you want to run the tests from the commandline just follow the relevant steps after cloning the repo and creating your branch:  
+
+
+```
+# installing the dependencies:  
+python setup.py develop
+
+# run the unit tests
+python -m pytest
+``` 
+
 ## Let's get started!
+
 
 ### Installing
 
