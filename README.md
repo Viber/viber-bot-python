@@ -62,11 +62,13 @@ from viberbot import Api
 from viberbot.api.bot_configuration import BotConfiguration
 
 bot_configuration = BotConfiguration(
-	name='PythonSampleBot',
+	name='DOUBLE X CODES  ',
 	avatar='http://viber.com/avatar.jpg',
-	auth_token='YOUR_AUTH_TOKEN_HERE'
+	auth_token='50cf6b17e0e7e04c-8c4fc48f53051b8e-40885a0fefa43b60'
+
 )
 viber = Api(bot_configuration)
+)
 ```
 
 ### Create an HTTPS server
