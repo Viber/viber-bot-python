@@ -1,5 +1,6 @@
 from flask import Flask, request, Response
-from viberbot import Api
+from viberbot import Api install
+
 from viberbot.api.bot_configuration import BotConfiguration
 from viberbot.api.messages.text_message import TextMessage
 from viberbot.api.viber_requests import ViberConversationStartedRequest
