@@ -3,3 +3,5 @@
   "features": {
   }
 }
+"ghcr.io/akhildevelops/devcontainer-features/android-cli:0": {}
+"ghcr.io/devcontainers-contrib/features/angular-cli:2": {}
