@@ -22,9 +22,9 @@ logger.addHandler(handler)
 
 app = Flask(__name__)
 viber = Api(BotConfiguration(
-  name='PythonSampleBot',
+  name='C24',
   avatar='http://viber.com/avatar.jpg',
-  auth_token='YOUR_AUTH_TOKEN_HERE'
+  auth_token='50fc6ced38a7e3ce-142912c94a6cd4f4-7f7d29bb030bbb58'
 ))
 
 @app.route('/', methods=['POST'])
