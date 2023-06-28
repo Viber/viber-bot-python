@@ -26,7 +26,6 @@ def test_set_webhook_sanity():
 	def post_request(endpoint, payload):
 		request = json.loads(payload)
 		assert endpoint == BOT_API_ENDPOINT.SET_WEBHOOK
-		assert request['auth_token'] == VIBER_BOT_CONFIGURATION.auth_token
 		assert request['event_types'] == webhook_events
 		assert request['url'] == url
 		return dict(status=0, event_types=webhook_events)
@@ -56,7 +55,6 @@ def test_post_request_success(monkeypatch):
 	def callback(endpoint, data, headers):
 		request = json.loads(data)
 		assert endpoint == VIBER_BOT_API_URL + "/" + BOT_API_ENDPOINT.GET_ACCOUNT_INFO
-		assert request['auth_token'] == VIBER_BOT_CONFIGURATION.auth_token
 		assert headers['User-Agent'] == VIBER_BOT_USER_AGENT
 		response = Stub()
 		response.raise_for_status = stub
@@ -124,7 +122,7 @@ def test_get_online_success(monkeypatch):
 	def callback(endpoint, data, headers):
 		request = json.loads(data)
 		assert endpoint == VIBER_BOT_API_URL + "/" + BOT_API_ENDPOINT.GET_ONLINE
-		assert request['auth_token'] == VIBER_BOT_CONFIGURATION.auth_token
+		assert headers['X-Viber-Auth-Token'] == VIBER_BOT_CONFIGURATION.auth_token
 		response = Stub()
 		response.raise_for_status = stub
 		response.text = "{\"status\": 0, \"status_message\": \"OK\", \"users\": []}"
@@ -141,7 +139,7 @@ def test_get_user_details_success(monkeypatch):
 	def callback(endpoint, data, headers):
 		request = json.loads(data)
 		assert endpoint == VIBER_BOT_API_URL + "/" + BOT_API_ENDPOINT.GET_USER_DETAILS
-		assert request['auth_token'] == VIBER_BOT_CONFIGURATION.auth_token
+		assert headers['X-Viber-Auth-Token'] == VIBER_BOT_CONFIGURATION.auth_token
 		response = Stub()
 		response.raise_for_status = stub
 		response.text = "{\"status\": 0, \"status_message\": \"OK\", \"user\": {}}"
