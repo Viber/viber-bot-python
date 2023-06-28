@@ -14,7 +14,6 @@ class ApiRequestSender(object):
 
 	def set_webhook(self, url, webhook_events=None, is_inline=False):
 		payload = {
-			'auth_token': self._bot_configuration.auth_token,
 			'url': url,
 			'is_inline': is_inline
 		}
@@ -34,18 +33,17 @@ class ApiRequestSender(object):
 		return result['event_types']
 
 	def get_account_info(self):
-		payload = {
-			'auth_token': self._bot_configuration.auth_token
-		}
 		return self.post_request(
 			endpoint=BOT_API_ENDPOINT.GET_ACCOUNT_INFO,
-			payload=json.dumps(payload))
+			payload=json.dumps(None)
+		)
 
 	def post_request(self, endpoint, payload):
 		try:
 			headers = requests.utils.default_headers()
 			headers.update({
-				'User-Agent': self._user_agent
+				'User-Agent': self._user_agent,
+				'X-Viber-Auth-Token': self._bot_configuration.auth_token
 			})
 			response = requests.post(self._viber_bot_api_url + '/' + endpoint, data=payload, headers=headers)
 			response.raise_for_status()
@@ -66,7 +64,6 @@ class ApiRequestSender(object):
 			raise Exception(u"missing parameter ids, should be a list of viber memberIds")
 
 		payload = {
-			'auth_token': self._bot_configuration.auth_token,
 			'ids': ids
 		}
 		result = self.post_request(
@@ -83,7 +80,6 @@ class ApiRequestSender(object):
 			raise Exception(u"missing parameter id")
 
 		payload = {
-			'auth_token': self._bot_configuration.auth_token,
 			'id': user_id
 		}
 		result = self.post_request(
