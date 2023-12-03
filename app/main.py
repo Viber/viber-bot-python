@@ -1,4 +1,4 @@
-from flask import Flask, request, Response
+from flask import Flask, request, Response, send_file
 
 from viberbot import Api
 from viberbot.api.bot_configuration import BotConfiguration
@@ -29,8 +29,8 @@ app = Flask(__name__)
 
 viber = Api(
     BotConfiguration(
-        name="PythonSampleBot",
-        avatar="http://viber.com/avatar.jpg",
+        name="FoxBot",
+        avatar="https://viber-fox-bot-9d12996926ae.herokuapp.com/foxbot_face",
         auth_token="5209490214e7e3a8-73f9d11c767e1d1c-5b47a71206785cf2",
     )
 )
@@ -75,3 +75,10 @@ def incoming():
         )
 
     return Response(status=200)
+
+
+@app.route("/foxbot_face")
+def show_foxbot_face():
+    # Imagine that user_image is determined dynamically for each user
+    face_path = "static/images/resized_foxbot_image.png"
+    return send_file(face_path, mimetype="image/png")
