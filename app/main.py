@@ -66,10 +66,6 @@ def incoming():
         or isinstance(viber_request, ViberUnsubscribedRequest)
     ):
         viber.send_messages(
-            viber_request.sender.id,
-            [TextMessage(None, None, viber_request.get_event_type())],
-        )
-        viber.send_messages(
             viber_request.user.id,
             [TextMessage(None, None, viber_request.get_event_type())],
         )
