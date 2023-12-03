@@ -67,7 +67,7 @@ def incoming():
     ):
         viber.send_messages(
             viber_request.user.id,
-            [TextMessage(None, None, viber_request.get_event_type())],
+            [TextMessage(None, None, viber_request.event_type)],
         )
     elif isinstance(viber_request, ViberFailedRequest):
         logger.warn(
