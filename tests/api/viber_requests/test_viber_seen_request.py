@@ -18,5 +18,5 @@ def test_create_request():
 	assert isinstance(request, ViberSeenRequest)
 	assert request.event_type == SAMPLE_REQUEST['event']
 	assert request.timestamp == SAMPLE_REQUEST['timestamp']
-	assert request.meesage_token == SAMPLE_REQUEST['message_token']
+	assert request.message_token == SAMPLE_REQUEST['message_token']
 	assert request.user_id == SAMPLE_REQUEST['user_id']
