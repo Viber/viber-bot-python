@@ -1,3 +1,6 @@
+certificates
+*.pem
+
 *~
 .project
 *.pyc

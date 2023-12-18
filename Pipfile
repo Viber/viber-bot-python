@@ -11,6 +11,8 @@ requests = "*"
 pytest = "*"
 gunicorn = "*"
 future = "*"
+pymongo = {extras = ["srv"], version = "*"}
+black = "*"
 
 [dev-packages]
 
