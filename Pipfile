@@ -13,6 +13,9 @@ gunicorn = "*"
 future = "*"
 pymongo = {extras = ["srv"], version = "*"}
 black = "*"
+psycopg2-binary = "*"
+python-dotenv = "*"
+faker = "*"
 
 [dev-packages]
 

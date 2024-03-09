@@ -31,7 +31,7 @@ viber = Api(
     BotConfiguration(
         name="FoxBot",
         avatar="https://viber-fox-bot-9d12996926ae.herokuapp.com/foxbot_face",
-        auth_token="5209490214e7e3a8-73f9d11c767e1d1c-5b47a71206785cf2",
+        auth_token=os.environ["VIBER_AUTH_KEY"],
     )
 )
 
