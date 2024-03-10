@@ -12,6 +12,17 @@ from entities import Answer, ChatBotUser, Question
 load_dotenv()
 
 
+class DatabaseConnection:
+    def __enter__(self):
+        self.conn = psycopg2.connect(os.environ["DATABASE_URL"], sslmode="require")
+        self.cur = self.conn.cursor()
+        return self.cur
+
+    def __exit__(self, exc_type, exc_value, traceback):
+        self.cur.close()
+        self.conn.close()
+
+
 def get_connection():
     DATABASE_URL = os.environ["DATABASE_URL"]
 
@@ -21,53 +32,52 @@ def get_connection():
 
 
 def get_chat_bot_users() -> List[ChatBotUser]:
-    conn = get_connection()
-    cur = conn.cursor()
-    # Connect to the PostgreSQL database
-    cur.execute(
-        "SELECT user_id, name, viber_id, created_at, active FROM chat_bot_users"
-    )
-    rows = cur.fetchall()
+    with DatabaseConnection() as cur:
+        # Connect to the PostgreSQL database
+        cur.execute(
+            "SELECT user_id, name, viber_id, created_at, active FROM chat_bot_users"
+        )
+        rows = cur.fetchall()
 
-    # Convert rows to list of ChatBotUser objects
-    chat_bot_users = []
-    for row in rows:
-        chat_bot_user = ChatBotUser(*row)
-        chat_bot_users.append(chat_bot_user)
+        # Convert rows to list of ChatBotUser objects
+        chat_bot_users = []
+        for row in rows:
+            chat_bot_user = ChatBotUser(*row)
+            chat_bot_users.append(chat_bot_user)
 
-    cur.close()
-    conn.close()
     return chat_bot_users
 
 
 def get_questions() -> List[Question]:
-    # Connect to the PostgreSQL database
-    cur.execute("SELECT question_id, question, user_id, created_at FROM questions")
+    with DatabaseConnection() as cur:
+        # Connect to the PostgreSQL database
+        cur.execute("SELECT question_id, question, user_id, created_at FROM questions")
 
-    rows = cur.fetchall()
+        rows = cur.fetchall()
 
-    # Convert rows to list of ChatBotUser objects
-    questions = []
-    for row in rows:
-        question = Question(*row)
-        questions.append(question)
+        # Convert rows to list of ChatBotUser objects
+        questions = []
+        for row in rows:
+            question = Question(*row)
+            questions.append(question)
 
     return questions
 
 
 def get_answers() -> List[Answer]:
-    # Connect to the PostgreSQL database
-    cur.execute(
-        "SELECT answer_id, answer, question_id, user_id, created_at, approved FROM answers"
-    )
+    with DatabaseConnection() as cur:
+        # Connect to the PostgreSQL database
+        cur.execute(
+            "SELECT answer_id, answer, question_id, user_id, created_at, approved FROM answers"
+        )
 
-    rows = cur.fetchall()
+        rows = cur.fetchall()
 
-    # Convert rows to list of ChatBotUser objects
-    answers = []
-    for row in rows:
-        answer = Answer(*row)
-        answers.append(answer)
+        # Convert rows to list of ChatBotUser objects
+        answers = []
+        for row in rows:
+            answer = Answer(*row)
+            answers.append(answer)
 
     return answers
 

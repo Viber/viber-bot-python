@@ -1,6 +1,6 @@
 from dataclasses import asdict
 from flask import Flask, jsonify, render_template, request, Response, send_file
-from app.postgre_utils import get_chat_bot_users
+from app.postgre_utils import get_answers, get_chat_bot_users, get_questions
 
 from viberbot import Api
 from viberbot.api.bot_configuration import BotConfiguration
@@ -58,6 +58,37 @@ def display_chat_bot_users():
     users = get_chat_bot_users()
     users_simple_types = [asdict(user) for user in users]
     return render_template("json_template.html", json_data=users_simple_types)
+
+
+@app.route("/questions", methods=["GET"])
+def display_questions():
+    questions = get_questions()
+    questions_simple_types = [asdict(question) for question in questions]
+    return render_template("json_template.html", json_data=questions_simple_types)
+
+
+@app.route("/answers", methods=["GET"])
+def display_answers():
+    answers = get_answers()
+    answers_simple_types = [asdict(answer) for answer in answers]
+    return render_template("json_template.html", json_data=answers_simple_types)
+
+
+@app.route("/q_and_a", methods=["GET"])
+def display_q_and_a():
+    answers = get_answers()
+    questions = get_questions()
+    answers_simple_types = [asdict(answer) for answer in answers]
+    questions_simple_types = [asdict(question) for question in questions]
+
+    q_a_pairs = []
+    for answer in answers_simple_types:
+        if answer["approved"]:
+            for question in questions_simple_types:
+                if answer["question_id"] == question["question_id"]:
+                    q_a_pairs.append({**answer, **question})
+
+    return render_template("json_template.html", json_data=q_a_pairs)
 
 
 @app.route("/", methods=["POST"])

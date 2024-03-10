@@ -4,21 +4,46 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Beautiful JSON</title>
+    <title>JSON to HTML Table</title>
     <style>
-        pre {
-            background-color: #f4f4f4;
-            border: 1px solid #ddd;
-            border-radius: 4px;
-            padding: 10px;
-            white-space: pre-wrap;
+        table {
+            border-collapse: collapse;
+            width: 100%;
+        }
+
+        th,
+        td {
+            border: 1px solid #dddddd;
+            text-align: left;
+            padding: 8px;
+        }
+
+        th {
+            background-color: #f2f2f2;
         }
     </style>
 </head>
 
 <body>
-    <h1>Beautiful JSON</h1>
-    <pre>{{ json_data | tojson(indent=4) }}</pre>
+    <h1>JSON to HTML Table</h1>
+    <table>
+        <thead>
+            <tr>
+                {% for key in json_data[0].keys() %}
+                <th>{{ key }}</th>
+                {% endfor %}
+            </tr>
+        </thead>
+        <tbody>
+            {% for obj in json_data %}
+            <tr>
+                {% for value in obj.values() %}
+                <td>{{ value }}</td>
+                {% endfor %}
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
 </body>
 
 </html>
