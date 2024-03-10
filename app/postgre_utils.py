@@ -21,6 +21,8 @@ def get_connection():
 
 
 def get_chat_bot_users() -> List[ChatBotUser]:
+    conn = get_connection()
+    cur = conn.cursor()
     # Connect to the PostgreSQL database
     cur.execute(
         "SELECT user_id, name, viber_id, created_at, active FROM chat_bot_users"
@@ -33,6 +35,8 @@ def get_chat_bot_users() -> List[ChatBotUser]:
         chat_bot_user = ChatBotUser(*row)
         chat_bot_users.append(chat_bot_user)
 
+    cur.close()
+    conn.close()
     return chat_bot_users
 
 
