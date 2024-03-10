@@ -72,11 +72,12 @@
                     rows.sort(function (rowA, rowB) {
                         var valueA = rowA.cells[column].textContent;
                         var valueB = rowB.cells[column].textContent;
+                        // Convert text values to numbers for numerical comparison
                         if (!isNaN(valueA) && !isNaN(valueB)) {
                             valueA = parseFloat(valueA);
                             valueB = parseFloat(valueB);
                         }
-                        return (isAscending ? valueA.localeCompare(valueB) : valueB.localeCompare(valueA));
+                        return (isAscending ? valueA - valueB : valueB - valueA);
                     });
                     for (var i = 0; i < rows.length; i++) {
                         table.querySelector('tbody').appendChild(rows[i]);
@@ -92,6 +93,7 @@
             }
         });
     </script>
+
 </body>
 
 </html>
