@@ -1,6 +1,7 @@
 from dataclasses import asdict
-from flask import Flask, jsonify, render_template, request, Response, send_file
-from app.entities import ChatBotUser
+from flask import Flask, render_template, request, Response, send_file
+from sqlalchemy import inspect
+from app.postgre_entities import ChatBotUser
 from app.postgre_entities import Session
 from app.postgre_utils import get_answers, get_chat_bot_users, get_questions
 
@@ -59,8 +60,13 @@ def hello_world():
 def display_chat_bot_users():
     session = Session()
     users = session.query(ChatBotUser).all()
-    users_simple_types = [asdict(user) for user in users]
-    session.commit()
+
+    mapper = inspect(ChatBotUser)
+
+    users_simple_types = [
+        {key: getattr(user_instance, key) for key in mapper.attrs.keys()}
+        for user_instance in users
+    ]
     session.close()
     return render_template("json_template.html", json_data=users_simple_types)
 
