@@ -17,6 +17,7 @@ psycopg2-binary = "*"
 python-dotenv = "*"
 faker = "*"
 sqlalchemy = "*"
+psycopg2 = "*"
 
 [dev-packages]
 

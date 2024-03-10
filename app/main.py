@@ -1,5 +1,7 @@
 from dataclasses import asdict
 from flask import Flask, jsonify, render_template, request, Response, send_file
+from app.entities import ChatBotUser
+from app.postgre_entities import Session
 from app.postgre_utils import get_answers, get_chat_bot_users, get_questions
 
 from viberbot import Api
@@ -55,8 +57,11 @@ def hello_world():
 
 @app.route("/chatbot_users", methods=["GET"])
 def display_chat_bot_users():
-    users = get_chat_bot_users()
+    session = Session()
+    users = session.query(ChatBotUser).all()
     users_simple_types = [asdict(user) for user in users]
+    session.commit()
+    session.close()
     return render_template("json_template.html", json_data=users_simple_types)
 
 
