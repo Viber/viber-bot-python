@@ -1,6 +1,7 @@
 from dataclasses import asdict
 from flask import Flask, render_template, request, Response, send_file
 from sqlalchemy import inspect
+from sqlalchemy.orm import aliased
 from app.postgre_entities import ChatBotUser, Question, Answer
 from app.postgre_entities import Session
 from app.postgre_utils import get_answers, get_chat_bot_users, get_questions
@@ -104,14 +105,21 @@ def display_answers():
 @app.route("/q_and_a", methods=["GET"])
 def display_q_and_a():
     session = Session()
+    question_user_alias = aliased(ChatBotUser)
+
+    answer_user_alias = aliased(ChatBotUser)
+
+    # Query for questions and approved answers
     questions_and_answers = (
-        session.query(Question, Answer, ChatBotUser, ChatBotUser)
+        session.query(Question, Answer, question_user_alias, answer_user_alias)
         .join(Answer, Question.question_id == Answer.question_id)
-        .join(ChatBotUser, Question.user_id == ChatBotUser.user_id)
-        .join(ChatBotUser, Answer.user_id == ChatBotUser.user_id)
+        .join(question_user_alias, Question.user_id == question_user_alias.user_id)
+        .join(answer_user_alias, Answer.user_id == answer_user_alias.user_id)
         .filter(Answer.approved == True)
         .all()
     )
+
+    # Process results
     result = []
     for question, answer, question_user, answer_user in questions_and_answers:
         result.append(
