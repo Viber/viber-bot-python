@@ -1,10 +1,8 @@
-from dataclasses import asdict
 from flask import Flask, render_template, request, Response, send_file
 from sqlalchemy import inspect
 from sqlalchemy.orm import aliased
 from app.postgre_entities import ChatBotUser, Question, Answer
 from app.postgre_entities import Session
-from app.postgre_utils import get_answers, get_chat_bot_users, get_questions
 
 from viberbot import Api
 from viberbot.api.bot_configuration import BotConfiguration
