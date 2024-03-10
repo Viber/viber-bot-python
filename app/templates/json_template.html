@@ -6,94 +6,110 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Sortable HTML Table</title>
     <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f6f6ef;
+            margin: 0;
+            padding: 0;
+        }
+
+        .container {
+            max-width: 800px;
+            margin: 20px auto;
+            background-color: #fff;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            overflow: hidden;
+        }
+
         table {
-            border-collapse: collapse;
             width: 100%;
+            border-collapse: collapse;
         }
 
         th,
         td {
-            border: 1px solid #dddddd;
-            text-align: left;
-            padding: 8px;
+            padding: 10px;
+            border-bottom: 1px solid #eee;
         }
 
         th {
-            background-color: #f2f2f2;
-            cursor: pointer;
+            background-color: #f6f6ef;
+            color: #000;
+            font-weight: normal;
+            text-align: left;
         }
 
-        th:hover {
-            background-color: #ddd;
+        td {
+            background-color: #fff;
+            color: #333;
         }
 
-        .asc::after {
-            content: "\25b4";
-        }
-
-        .desc::after {
-            content: "\25be";
+        tr:hover {
+            background-color: #f6f6ef;
         }
     </style>
 </head>
 
 <body>
-    <h1>Sortable HTML Table</h1>
-    <table id="sortable-table">
-        <thead>
-            <tr>
-                {% for key in json_data[0].keys() %}
-                <th class="sortable">{{ key }}</th>
+    <div class="container">
+        <h1>Sortable HTML Table</h1>
+        <table id="sortable-table">
+            <thead>
+                <tr>
+                    {% for key in json_data[0].keys() %}
+                    <th class="sortable">{{ key }}</th>
+                    {% endfor %}
+                </tr>
+            </thead>
+            <tbody>
+                {% for obj in json_data %}
+                <tr>
+                    {% for value in obj.values() %}
+                    <td>{{ value }}</td>
+                    {% endfor %}
+                </tr>
                 {% endfor %}
-            </tr>
-        </thead>
-        <tbody>
-            {% for obj in json_data %}
-            <tr>
-                {% for value in obj.values() %}
-                <td>{{ value }}</td>
-                {% endfor %}
-            </tr>
-            {% endfor %}
-        </tbody>
-    </table>
+            </tbody>
+        </table>
 
-    <script>
-        document.addEventListener("DOMContentLoaded", function () {
-            var table = document.getElementById('sortable-table');
-            var ths = table.getElementsByTagName('th');
-            for (var i = 0; i < ths.length; i++) {
-                ths[i].addEventListener('click', function () {
-                    var th = this;
-                    var table = th.closest('table');
-                    var column = th.cellIndex;
-                    var rows = Array.from(table.querySelectorAll('tbody > tr'));
-                    var isAscending = th.classList.toggle('asc');
-                    rows.sort(function (rowA, rowB) {
-                        var valueA = rowA.cells[column].textContent;
-                        var valueB = rowB.cells[column].textContent;
-                        // Convert text values to numbers for numerical comparison
-                        if (!isNaN(valueA) && !isNaN(valueB)) {
-                            valueA = parseFloat(valueA);
-                            valueB = parseFloat(valueB);
+        <script>
+            document.addEventListener("DOMContentLoaded", function () {
+                var table = document.getElementById('sortable-table');
+                var ths = table.getElementsByTagName('th');
+                for (var i = 0; i < ths.length; i++) {
+                    ths[i].addEventListener('click', function () {
+                        var th = this;
+                        var table = th.closest('table');
+                        var column = th.cellIndex;
+                        var rows = Array.from(table.querySelectorAll('tbody > tr'));
+                        var isAscending = th.classList.toggle('asc');
+                        rows.sort(function (rowA, rowB) {
+                            var valueA = rowA.cells[column].textContent;
+                            var valueB = rowB.cells[column].textContent;
+                            // Convert text values to numbers for numerical comparison
+                            if (!isNaN(valueA) && !isNaN(valueB)) {
+                                valueA = parseFloat(valueA);
+                                valueB = parseFloat(valueB);
+                            }
+                            return (isAscending ? valueA - valueB : valueB - valueA);
+                        });
+                        for (var i = 0; i < rows.length; i++) {
+                            table.querySelector('tbody').appendChild(rows[i]);
                         }
-                        return (isAscending ? valueA - valueB : valueB - valueA);
+                        var sortedThs = table.querySelectorAll('th.sortable');
+                        for (var i = 0; i < sortedThs.length; i++) {
+                            if (sortedThs[i] !== th) {
+                                sortedThs[i].classList.remove('asc');
+                                sortedThs[i].classList.remove('desc');
+                            }
+                        }
                     });
-                    for (var i = 0; i < rows.length; i++) {
-                        table.querySelector('tbody').appendChild(rows[i]);
-                    }
-                    var sortedThs = table.querySelectorAll('th.sortable');
-                    for (var i = 0; i < sortedThs.length; i++) {
-                        if (sortedThs[i] !== th) {
-                            sortedThs[i].classList.remove('asc');
-                            sortedThs[i].classList.remove('desc');
-                        }
-                    }
-                });
-            }
-        });
-    </script>
-
+                }
+            });
+        </script>
+    </div>
 </body>
 
 </html>
