@@ -6,7 +6,7 @@ from dotenv import load_dotenv
 from faker import Faker
 import psycopg2
 
-from entities import Answer, ChatBotUser, Question
+from app.entities import Answer, ChatBotUser, Question
 
 
 load_dotenv()
