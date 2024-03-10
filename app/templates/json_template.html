@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>JSON to HTML Table</title>
+    <title>Sortable HTML Table</title>
     <style>
         table {
             border-collapse: collapse;
@@ -20,17 +20,30 @@
 
         th {
             background-color: #f2f2f2;
+            cursor: pointer;
+        }
+
+        th:hover {
+            background-color: #ddd;
+        }
+
+        .asc::after {
+            content: "\25b4";
+        }
+
+        .desc::after {
+            content: "\25be";
         }
     </style>
 </head>
 
 <body>
-    <h1>JSON to HTML Table</h1>
-    <table>
+    <h1>Sortable HTML Table</h1>
+    <table id="sortable-table">
         <thead>
             <tr>
                 {% for key in json_data[0].keys() %}
-                <th>{{ key }}</th>
+                <th class="sortable">{{ key }}</th>
                 {% endfor %}
             </tr>
         </thead>
@@ -44,6 +57,41 @@
             {% endfor %}
         </tbody>
     </table>
+
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+            var table = document.getElementById('sortable-table');
+            var ths = table.getElementsByTagName('th');
+            for (var i = 0; i < ths.length; i++) {
+                ths[i].addEventListener('click', function () {
+                    var th = this;
+                    var table = th.closest('table');
+                    var column = th.cellIndex;
+                    var rows = Array.from(table.querySelectorAll('tbody > tr'));
+                    var isAscending = th.classList.toggle('asc');
+                    rows.sort(function (rowA, rowB) {
+                        var valueA = rowA.cells[column].textContent;
+                        var valueB = rowB.cells[column].textContent;
+                        if (!isNaN(valueA) && !isNaN(valueB)) {
+                            valueA = parseFloat(valueA);
+                            valueB = parseFloat(valueB);
+                        }
+                        return (isAscending ? valueA.localeCompare(valueB) : valueB.localeCompare(valueA));
+                    });
+                    for (var i = 0; i < rows.length; i++) {
+                        table.querySelector('tbody').appendChild(rows[i]);
+                    }
+                    var sortedThs = table.querySelectorAll('th.sortable');
+                    for (var i = 0; i < sortedThs.length; i++) {
+                        if (sortedThs[i] !== th) {
+                            sortedThs[i].classList.remove('asc');
+                            sortedThs[i].classList.remove('desc');
+                        }
+                    }
+                });
+            }
+        });
+    </script>
 </body>
 
 </html>
