@@ -47,12 +47,12 @@
             color: #333;
         }
 
-        tr:nth-child(even) {
+        tr:nth-child(even) td {
             background-color: #f2f2f2;
             /* Alternate background color for even rows */
         }
 
-        tr:hover {
+        tr:hover td {
             background-color: #f6f6ef;
         }
     </style>
@@ -93,11 +93,14 @@
                         rows.sort(function (rowA, rowB) {
                             var valueA = rowA.cells[column].textContent.trim();
                             var valueB = rowB.cells[column].textContent.trim();
-                            // Convert text values to lowercase for case-insensitive sorting
-                            valueA = valueA.toLowerCase();
-                            valueB = valueB.toLowerCase();
+                            // Convert text values to numbers for numerical comparison
+                            if (!isNaN(valueA) && !isNaN(valueB)) {
+                                valueA = parseFloat(valueA);
+                                valueB = parseFloat(valueB);
+                                return isAscending ? valueA - valueB : valueB - valueA;
+                            }
                             // Compare text values alphabetically
-                            return (isAscending ? valueA.localeCompare(valueB) : valueB.localeCompare(valueA));
+                            return isAscending ? valueA.localeCompare(valueB) : valueB.localeCompare(valueA);
                         });
                         for (var i = 0; i < rows.length; i++) {
                             table.querySelector('tbody').appendChild(rows[i]);
