@@ -122,7 +122,7 @@ def display_q_and_a():
                 "answer_text": answer.answer_text,
             }
         )
-
+    session.close()
     return render_template("json_template.html", json_data=result)
 
 
