@@ -1,7 +1,7 @@
 from dataclasses import asdict
 from flask import Flask, render_template, request, Response, send_file
 from sqlalchemy import inspect
-from app.postgre_entities import ChatBotUser
+from app.postgre_entities import ChatBotUser, Question, Answer
 from app.postgre_entities import Session
 from app.postgre_utils import get_answers, get_chat_bot_users, get_questions
 
@@ -73,33 +73,57 @@ def display_chat_bot_users():
 
 @app.route("/questions", methods=["GET"])
 def display_questions():
-    questions = get_questions()
-    questions_simple_types = [asdict(question) for question in questions]
+    session = Session()
+
+    questions = session.query(Question).all()
+    mapper = inspect(Question)
+
+    questions_simple_types = [
+        {key: getattr(question_instance, key) for key in mapper.attrs.keys()}
+        for question_instance in questions
+    ]
+
+    session.close()
     return render_template("json_template.html", json_data=questions_simple_types)
 
 
 @app.route("/answers", methods=["GET"])
 def display_answers():
-    answers = get_answers()
-    answers_simple_types = [asdict(answer) for answer in answers]
+    session = Session()
+
+    answers = session.query(Answer).all()
+    mapper = inspect(Answer)
+
+    answers_simple_types = [
+        {key: getattr(answer_instance, key) for key in mapper.attrs.keys()}
+        for answer_instance in answers
+    ]
     return render_template("json_template.html", json_data=answers_simple_types)
 
 
 @app.route("/q_and_a", methods=["GET"])
 def display_q_and_a():
-    answers = get_answers()
-    questions = get_questions()
-    answers_simple_types = [asdict(answer) for answer in answers]
-    questions_simple_types = [asdict(question) for question in questions]
+    session = Session()
+    questions_and_answers = (
+        session.query(Question, Answer, ChatBotUser, ChatBotUser)
+        .join(Answer, Question.question_id == Answer.question_id)
+        .join(ChatBotUser, Question.user_id == ChatBotUser.user_id)
+        .join(ChatBotUser, Answer.user_id == ChatBotUser.user_id)
+        .filter(Answer.approved == True)
+        .all()
+    )
+    result = []
+    for question, answer, question_user, answer_user in questions_and_answers:
+        result.append(
+            {
+                "question_user_name": question_user.name,
+                "question_text": question.question_text,
+                "answer_user_name": answer_user.name,
+                "answer_text": answer.answer_text,
+            }
+        )
 
-    q_a_pairs = []
-    for answer in answers_simple_types:
-        if answer["approved"]:
-            for question in questions_simple_types:
-                if answer["question_id"] == question["question_id"]:
-                    q_a_pairs.append({**answer, **question})
-
-    return render_template("json_template.html", json_data=q_a_pairs)
+    return render_template("json_template.html", json_data=result)
 
 
 @app.route("/", methods=["POST"])
