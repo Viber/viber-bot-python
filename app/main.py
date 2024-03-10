@@ -1,4 +1,5 @@
-from flask import Flask, request, Response, send_file
+from flask import Flask, jsonify, request, Response, send_file
+from app.postgre_utils import get_chat_bot_users
 
 from viberbot import Api
 from viberbot.api.bot_configuration import BotConfiguration
@@ -49,6 +50,12 @@ t.start()
 @app.route("/", methods=["GET"])
 def hello_world():
     return "Hello world!"
+
+
+@app.route("/chatbot_users", methods=["GET"])
+def display_chat_bot_users():
+    users = get_chat_bot_users()
+    return jsonify(users)
 
 
 @app.route("/", methods=["POST"])
