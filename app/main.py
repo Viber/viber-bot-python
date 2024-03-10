@@ -1,3 +1,4 @@
+from dataclasses import asdict
 from flask import Flask, jsonify, render_template, request, Response, send_file
 from app.postgre_utils import get_chat_bot_users
 
@@ -55,7 +56,8 @@ def hello_world():
 @app.route("/chatbot_users", methods=["GET"])
 def display_chat_bot_users():
     users = get_chat_bot_users()
-    return render_template("json_template.html", json_data=jsonify(users))
+    users_simple_types = [asdict(user) for user in users]
+    return render_template("json_template.html", json_data=users_simple_types)
 
 
 @app.route("/", methods=["POST"])
